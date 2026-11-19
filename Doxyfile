@@ -1,0 +1,3233 @@
+# *********************************************
+# *          OPZIONI DA CONFIGURARE           *
+# *********************************************
+# 1. PROJECT_NAME
+#    Assegna un nome al tuo progetto, apparirà nel titolo della documentazione
+# 2. INPUT
+#    Specifica la directory o il file del codice sorgente che deve essere analizzato da Doxygen.
+#    E' possibile inserire più directory separate da spazi
+# 3. RECURSIVE
+#    Se il codice è distribuito in più sottodirectory, è necessario impostarlo su YES,
+#    altrimenti Doxygen analizzerà solo la directory di primo livello specificata in INPUT
+# 4. EXTRACT_ALL
+#    Se il tuo codice non ha molti commenti nel formato @brief di Doxygen, 
+#    impostandolo su YES si forzare l'estrazione di tutte le entità (classi, funzioni, ecc.),
+#    anche se non sono commentate
+# 5. GENERATE_LATEX
+#    Se si desidera solo di documentazione HTML, disattivare l'output LaTeX/PDF, 
+#    con il valore NO. DoxyGen non è in grado di creare direttamente file PDF, genera
+#    file TeX (per l'esattezza LaTeX). Per generare file PDF installare un compilatore 
+#    LaTeX per Windows, si consiglia MiKTeX. 
+#    si entra in latex/ e si lancia ./make.bat (o ./make se si è sotto Linux/macOS).
+#    Nella directory latex sarà generato il file refman.pdf.
+#    Prerequisito → pdflatex deve essere disponibile nel PATH.
+# 6. OUTPUT_DIRECTORY
+#    Specifica una directory di output separata per la documentazione. 
+#    Diversamente genera le directory html/ e /latex direttamente in input
+# 7. OUTPUT_LANGUAGE 
+#    Controlla le stringhe generate da Doxygen. I testi scritti nei commenti ## restano 
+#    nella lingua in cui sono scritti.
+# ALTRE ESIGENZE PARTICOLARI:
+#  - includere membri privati/statici: EXTRACT_PRIVATE = YES e EXTRACT_STATIC = YES.
+#  - navigare nel codice sorgente: SOURCE_BROWSER = YES, cliccare sulle funzioni nella
+#    documentazione per visualizzare il codice sorgente
+#  - Usare README come homepage: USE_MDFILE_AS_MAINPAGE = README.md e aggiungere 
+#    il file README in INPUT
+#  - HAVE_DOT per la generazione di diagrammi di classi)
+#  - GENERATE_TREEVIEW per la barra di navigazione ad albero
+#  - HTML_COLORSTYLE per utilizzare il tema dei colori
+
+
+
+# Doxyfile 1.18.0
+
+# Questo file descrive le impostazioni da utilizzare con il sistema di
+# documentazione Doxygen (www.doxygen.org) per un progetto.
+#
+# Tutto il testo dopo un doppio cancelletto (##) è considerato un commento e
+# viene posizionato davanti al TAG che lo precede.
+#
+# Tutto il testo dopo un singolo cancelletto (#) è considerato un commento e
+# verrà ignorato. Il formato è:
+# TAG = valore [valore, ...]
+# Per le liste, gli elementi possono anche essere aggiunti usando:
+# TAG += valore [valore, ...]
+# I valori che contengono spazi devono essere racchiusi tra virgolette (" ").
+#
+# Nota:
+#
+# Usa Doxygen per confrontare il file di configurazione usato con il file di
+# configurazione modello:
+# doxygen -x [configFile]
+# Usa Doxygen per confrontare il file di configurazione usato con il file di
+# configurazione modello senza sostituire le variabili d'ambiente o le variabili
+# di sostituzione di tipo CMake:
+# doxygen -x_noenv [configFile]
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative al progetto
+#---------------------------------------------------------------------------
+
+# Questo tag specifica la codifica usata per tutti i caratteri nel file di
+# configurazione che seguono. Il valore predefinito è UTF-8, che è anche la
+# codifica usata per tutto il testo prima della prima occorrenza di questo tag.
+# Doxygen usa libiconv (o la iconv integrata in libc) per la transcodifica. Vedi
+# https://www.gnu.org/software/libiconv/ per l'elenco delle codifiche possibili.
+# Il valore predefinito è: UTF-8.
+
+DOXYFILE_ENCODING      = UTF-8
+
+# Il tag PROJECT_NAME è una singola parola (o una sequenza di parole racchiuse
+# tra virgolette doppie, a meno che tu non stia usando Doxywizard) che dovrebbe
+# identificare il progetto per cui viene generata la documentazione. Questo nome
+# è usato nel titolo della maggior parte delle pagine generate e in alcuni altri
+# punti.
+# Il valore predefinito è: My Project.
+
+PROJECT_NAME           = "API Lab"
+
+# Il tag PROJECT_NUMBER può essere usato per inserire un numero di progetto o di
+# revisione. Può essere utile per archiviare la documentazione generata o se
+# viene usato un sistema di controllo versione.
+
+PROJECT_NUMBER         =
+
+# Usando il tag PROJECT_BRIEF si può fornire una descrizione opzionale di una
+# riga per un progetto che appare in cima a ogni pagina e dovrebbe dare ai
+# lettori una rapida idea dello scopo del progetto. Mantieni la descrizione
+# breve.
+
+PROJECT_BRIEF          =
+
+# Con il tag PROJECT_LOGO si può specificare un logo o un'icona inclusa nella
+# documentazione. L'altezza massima del logo non deve superare i 55 pixel e la
+# larghezza massima non deve superare i 200 pixel. Doxygen copierà il logo nella
+# directory di output.
+
+PROJECT_LOGO           =
+
+# Con il tag PROJECT_ICON si può specificare un'icona inclusa nelle schede
+# quando viene mostrato il documento HTML. Doxygen copierà il logo nella
+# directory di output.
+
+PROJECT_ICON           =
+
+# Il tag OUTPUT_DIRECTORY viene usato per specificare il percorso (relativo o
+# assoluto) in cui verrà scritta la documentazione generata. Se viene inserito
+# un percorso relativo, sarà relativo alla posizione da cui è stato avviato
+# Doxygen. Se lasciato vuoto verrà usata la directory corrente.
+
+OUTPUT_DIRECTORY       = 
+
+# Se il tag CREATE_SUBDIRS è impostato a YES allora Doxygen creerà fino a 4096
+# sottodirectory (su 2 livelli) sotto la directory di output di ogni formato di
+# output e distribuirà i file generati in queste directory. Abilitare questa
+# opzione può essere utile quando si fornisce a Doxygen un'enorme quantità di
+# file sorgente, dove mettere tutti i file generati nella stessa directory
+# causerebbe altrimenti problemi di prestazioni per il file system. Regola
+# CREATE_SUBDIRS_LEVEL per controllare il numero di sottodirectory.
+# Il valore predefinito è: NO.
+
+CREATE_SUBDIRS         = NO
+
+# Controlla il numero di sottodirectory che verranno create quando il tag
+# CREATE_SUBDIRS è impostato a YES. Il livello 0 rappresenta 16 directory, e ogni
+# incremento di livello raddoppia il numero di directory, risultando in 4096
+# directory al livello 8 che è il valore predefinito e anche il valore massimo.
+# Le sottodirectory sono organizzate su 2 livelli, il primo livello ha sempre un
+# numero fisso di 16 directory.
+# Valore minimo: 0, valore massimo: 8, valore predefinito: 8.
+# Questo tag richiede che il tag CREATE_SUBDIRS sia impostato a YES.
+
+CREATE_SUBDIRS_LEVEL   = 8
+
+# Se il tag ALLOW_UNICODE_NAMES è impostato a YES, Doxygen permetterà che
+# caratteri non ASCII appaiano nei nomi dei file generati. Se impostato a NO, i
+# caratteri non ASCII verranno escapati, ad esempio _xE3_x81_x84 sarà usato per
+# Unicode U+3044.
+# Il valore predefinito è: NO.
+
+ALLOW_UNICODE_NAMES    = NO
+
+# Il tag OUTPUT_LANGUAGE viene usato per specificare la lingua in cui viene
+# scritta tutta la documentazione generata da Doxygen. Doxygen userà questa
+# informazione per generare tutto l'output costante nella lingua appropriata.
+# Valori possibili sono: Afrikaans, Arabic, Armenian, Brazilian, Bulgarian,
+# Catalan, Chinese, Chinese-Traditional, Croatian, Czech, Danish, Dutch, English
+# (United States), Esperanto, Farsi (Persian), Finnish, French, German, Greek,
+# Hindi, Hungarian, Indonesian, Italian, Japanese, Japanese-en (Giapponese con
+# messaggi in inglese), Korean, Korean-en (Coreano con messaggi in inglese),
+# Latvian, Lithuanian, Macedonian, Norwegian, Persian (Farsi), Polish,
+# Portuguese, Romanian, Russian, Serbian, Serbian-Cyrillic, Slovak, Slovene,
+# Spanish, Swedish, Turkish, Ukrainian e Vietnamese.
+# Il valore predefinito è: English.
+
+OUTPUT_LANGUAGE        = English
+
+# Se il tag BRIEF_MEMBER_DESC è impostato a YES, Doxygen includerà descrizioni
+# brevi dei membri dopo i membri elencati nella documentazione di file e classi
+# (simile a Javadoc). Imposta a NO per disabilitare questo comportamento.
+# Il valore predefinito è: YES.
+
+BRIEF_MEMBER_DESC      = YES
+
+# Se il tag REPEAT_BRIEF è impostato a YES, Doxygen anteporrà la descrizione
+# breve di un membro o funzione prima della descrizione dettagliata
+#
+# Nota: Se sia HIDE_UNDOC_MEMBERS che BRIEF_MEMBER_DESC sono impostati a NO, le
+# descrizioni brevi verranno completamente soppresse.
+# Il valore predefinito è: YES.
+
+REPEAT_BRIEF           = YES
+
+# Questo tag implementa un abbreviatore quasi intelligente di descrizioni brevi
+# che viene usato per formare il testo in vari elenchi. Ogni stringa in questa
+# lista, se trovata come testo iniziale della descrizione breve, verrà rimossa
+# dal testo e il risultato, dopo aver elaborato l'intera lista, viene usato come
+# testo annotato. Altrimenti, la descrizione breve viene usata così com'è. Se
+# lasciato vuoto, vengono usati i seguenti valori ($name viene automaticamente
+# sostituito con il nome dell'entità): The $name class, The $name widget, The
+# $name file, is, provides, specifies, contains, represents, a, an e the.
+
+ABBREVIATE_BRIEF       = "The $name class" \
+                         "The $name widget" \
+                         "The $name file" \
+                         is \
+                         provides \
+                         specifies \
+                         contains \
+                         represents \
+                         a \
+                         an \
+                         the
+
+# Se i tag ALWAYS_DETAILED_SEC e REPEAT_BRIEF sono entrambi impostati a YES
+# allora Doxygen genererà una sezione dettagliata anche se c'è solo una
+# descrizione breve.
+# Il valore predefinito è: NO.
+
+ALWAYS_DETAILED_SEC    = NO
+
+# Se il tag INLINE_INHERITED_MEMB è impostato a YES, Doxygen mostrerà tutti i
+# membri ereditati di una classe nella documentazione di quella classe come se
+# quei membri fossero membri ordinari della classe. Costruttori, distruttori e
+# operatori di assegnazione delle classi base non verranno mostrati.
+# Il valore predefinito è: NO.
+
+INLINE_INHERITED_MEMB  = NO
+
+# Se il tag FULL_PATH_NAMES è impostato a YES, Doxygen anteporrà il percorso
+# completo prima dei nomi dei file nell'elenco dei file e nei file di intestazione.
+# Se impostato a NO verrà usato il percorso più breve che rende univoco il nome
+# del file.
+# Il valore predefinito è: YES.
+
+FULL_PATH_NAMES        = YES
+
+# Il tag STRIP_FROM_PATH può essere usato per rimuovere una parte definita
+# dall'utente del percorso. La rimozione viene fatta solo se una delle stringhe
+# specificate corrisponde alla parte sinistra del percorso. Il tag può essere
+# usato per mostrare percorsi relativi nell'elenco dei file. Se lasciato vuoto
+# viene usata come percorso da rimuovere la directory da cui viene eseguito
+# Doxygen.
+#
+# Nota che qui puoi specificare percorsi assoluti, ma anche relativi, che saranno
+# relativi alla directory da cui viene avviato Doxygen.
+# Questo tag richiede che il tag FULL_PATH_NAMES sia impostato a YES.
+
+STRIP_FROM_PATH        =
+
+# Il tag STRIP_FROM_INC_PATH può essere usato per rimuovere una parte definita
+# dall'utente del percorso menzionato nella documentazione di una classe, che
+# indica al lettore quale file di intestazione includere per usare una classe.
+# Se lasciato vuoto viene usato solo il nome del file di intestazione contenente
+# la definizione della classe. Altrimenti si dovrebbe specificare la lista dei
+# percorsi di inclusione che normalmente vengono passati al compilatore usando
+# il flag -I.
+
+STRIP_FROM_INC_PATH    =
+
+# Se il tag SHORT_NAMES è impostato a YES, Doxygen genererà nomi di file molto
+# più corti (ma meno leggibili). Questo può essere utile se il tuo file system
+# non supporta nomi lunghi come su DOS, Mac o CD-ROM.
+# Il valore predefinito è: NO.
+
+SHORT_NAMES            = NO
+
+# Se il tag JAVADOC_AUTOBRIEF è impostato a YES allora Doxygen interpreterà la
+# prima riga (fino al primo punto, punto interrogativo o punto esclamativo) di
+# un commento in stile Javadoc come descrizione breve. Se impostato a NO, lo
+# stile Javadoc si comporterà proprio come i commenti regolari in stile Qt
+# (richiedendo quindi un comando @brief esplicito per una descrizione breve).
+# Il valore predefinito è: NO.
+
+JAVADOC_AUTOBRIEF      = NO
+
+# Se il tag JAVADOC_BANNER è impostato a YES allora Doxygen interpreterà una
+# riga come
+# /***************
+# come l'inizio di un commento in stile Javadoc "banner". Se impostato a NO, lo
+# stile Javadoc si comporterà proprio come i commenti regolari e non verrà
+# interpretato da Doxygen.
+# Il valore predefinito è: NO.
+
+JAVADOC_BANNER         = NO
+
+# Se il tag QT_AUTOBRIEF è impostato a YES allora Doxygen interpreterà la prima
+# riga (fino al primo punto, punto interrogativo o punto esclamativo) di un
+# commento in stile Qt come descrizione breve. Se impostato a NO, lo stile Qt si
+# comporterà proprio come i commenti regolari in stile Qt (richiedendo quindi un
+# comando \brief esplicito per una descrizione breve).
+# Il valore predefinito è: NO.
+
+QT_AUTOBRIEF           = NO
+
+# Il tag MULTILINE_CPP_IS_BRIEF può essere impostato a YES per far sì che Doxygen
+# tratti un blocco di commento speciale C++ multi-riga (cioè un blocco di
+# commenti //! o ///) come descrizione breve. Questo era il comportamento
+# predefinito in passato. Il nuovo valore predefinito è trattare un blocco di
+# commento C++ multi-riga come descrizione dettagliata. Imposta questo tag a YES
+# se preferisci invece il vecchio comportamento.
+#
+# Nota che impostare questo tag a YES significa anche che i commenti rational
+# rose non vengono più riconosciuti.
+# Il valore predefinito è: NO.
+
+MULTILINE_CPP_IS_BRIEF = NO
+
+# Per impostazione predefinita le docstring Python vengono mostrate come testo
+# preformattato e i comandi speciali di Doxygen non possono essere usati.
+# Impostando PYTHON_DOCSTRING a NO è possibile usare i comandi speciali di
+# Doxygen e il contenuto dei blocchi di documentazione delle docstring viene
+# mostrato come documentazione Doxygen.
+# Il valore predefinito è: YES.
+
+PYTHON_DOCSTRING       = YES
+
+# Se il tag INHERIT_DOCS è impostato a YES allora un membro non documentato
+# eredita la documentazione da qualsiasi membro documentato che esso
+# reimplementa.
+# Il valore predefinito è: YES.
+
+INHERIT_DOCS           = YES
+
+# Se il tag SEPARATE_MEMBER_PAGES è impostato a YES allora Doxygen produrrà una
+# nuova pagina per ogni membro. Se impostato a NO, la documentazione di un
+# membro farà parte del file/classe/namespace che lo contiene.
+# Il valore predefinito è: NO.
+
+SEPARATE_MEMBER_PAGES  = NO
+
+# Il tag TAB_SIZE può essere usato per impostare il numero di spazi in una
+# tabulazione. Doxygen usa questo valore per sostituire le tabulazioni con spazi
+# nei frammenti di codice.
+# Valore minimo: 1, valore massimo: 16, valore predefinito: 4.
+
+TAB_SIZE               = 4
+
+# Questo tag può essere usato per specificare un numero di alias che fungono da
+# comandi nella documentazione. Un alias ha la forma:
+# nome=valore
+# Ad esempio aggiungendo
+# "sideeffect=@par Side Effects:^^"
+# ti permetterà di inserire il comando \sideeffect (o @sideeffect) nella
+# documentazione, che risulterà in un paragrafo definito dall'utente con
+# intestazione "Side Effects:". Nota che non puoi inserire \n nel valore di un
+# alias per inserire nuove righe (nell'output risultante). Puoi inserire ^^ nel
+# valore di un alias per inserire una nuova riga come se ci fosse una nuova riga
+# fisica nel file originale. Quando hai bisogno di una { o } o , letterale nel
+# valore di un alias devi fare l'escape con una barra rovesciata (\), questo può
+# portare a conflitti con i comandi \{ e \} per questi si consiglia di usare la
+# versione @{ e @} o usare un doppio escape (\\{ e \\})
+
+ALIASES                =
+
+# Imposta il tag OPTIMIZE_OUTPUT_FOR_C a YES se il tuo progetto consiste solo di
+# sorgenti C. Doxygen genererà allora un output più adatto al C. Ad esempio,
+# alcuni dei nomi usati saranno diversi. L'elenco di tutti i membri sarà omesso,
+# ecc.
+# Il valore predefinito è: NO.
+
+OPTIMIZE_OUTPUT_FOR_C  = NO
+
+# Imposta il tag OPTIMIZE_OUTPUT_JAVA a YES se il tuo progetto consiste solo di
+# sorgenti Java o Python. Doxygen genererà allora un output più adatto a quel
+# linguaggio. Ad esempio, i namespace verranno presentati come package, gli
+# scope qualificati appariranno diversi, ecc.
+# Il valore predefinito è: NO.
+
+OPTIMIZE_OUTPUT_JAVA   = NO
+
+# Imposta il tag OPTIMIZE_FOR_FORTRAN a YES se il tuo progetto consiste di
+# sorgenti Fortran. Doxygen genererà allora un output adatto al Fortran.
+# Il valore predefinito è: NO.
+
+OPTIMIZE_FOR_FORTRAN   = NO
+
+# Imposta il tag OPTIMIZE_OUTPUT_VHDL a YES se il tuo progetto consiste di
+# sorgenti VHDL. Doxygen genererà allora un output adatto al VHDL.
+# Il valore predefinito è: NO.
+
+OPTIMIZE_OUTPUT_VHDL   = NO
+
+# Imposta il tag OPTIMIZE_OUTPUT_SLICE a YES se il tuo progetto consiste solo di
+# sorgenti Slice. Doxygen genererà allora un output più adatto a quel linguaggio.
+# Ad esempio, i namespace verranno presentati come moduli, i tipi saranno
+# separati in più gruppi, ecc.
+# Il valore predefinito è: NO.
+
+OPTIMIZE_OUTPUT_SLICE  = NO
+
+# Doxygen seleziona il parser da usare in base all'estensione dei file che
+# analizza. Con questo tag puoi assegnare quale parser usare per una data
+# estensione. Doxygen ha una mappatura integrata, ma puoi sovrascriverla o
+# estenderla usando questo tag. Il formato è ext=linguaggio, dove ext è
+# un'estensione di file, e linguaggio è uno dei parser supportati da Doxygen:
+# IDL, Java, JavaScript, Csharp (C#), C, C++, Lex, D, PHP, md (Markdown),
+# Objective-C, Python, Slice, VHDL, Fortran (Fortran a formato fisso:
+# FortranFixed, Fortran a formato libero: FortranFree, Fortran a formato non
+# specificato: Fortran. In quest'ultimo caso il parser cerca di indovinare se il
+# codice è a formato fisso o libero, questo è il valore predefinito per i file di
+# tipo Fortran). Ad esempio per far trattare a Doxygen i file .inc come file
+# Fortran (predefinito è PHP), e i file .f come C (predefinito è Fortran), usa:
+# inc=Fortran f=C.
+#
+# Nota: Per i file senza estensione puoi usare no_extension come segnaposto.
+#
+# Nota che per le estensioni personalizzate devi anche impostare FILE_PATTERNS
+# altrimenti i file non vengono letti da Doxygen. Quando specifichi
+# no_extension dovresti aggiungere * a FILE_PATTERNS.
+#
+# Nota vedi anche l'elenco delle mappature di estensioni di file predefinite.
+
+EXTENSION_MAPPING      =
+
+# Se il tag MARKDOWN_SUPPORT è abilitato allora Doxygen pre-elabora tutti i
+# commenti secondo il formato Markdown, che permette una documentazione più
+# leggibile. Vedi https://daringfireball.net/projects/markdown/ per dettagli.
+# L'output dell'elaborazione Markdown viene ulteriormente elaborato da Doxygen,
+# quindi puoi mescolare comandi Doxygen, HTML e XML con la formattazione
+# Markdown. Disabilita solo in caso di problemi di compatibilità all'indietro.
+# Il valore predefinito è: YES.
+
+MARKDOWN_SUPPORT       = YES
+
+# Se il tag MARKDOWN_STRICT è abilitato allora Doxygen tratta il testo nei
+# commenti come formattato Markdown anche nei casi in cui il formato nativo di
+# Doxygen entra in conflitto con quello di Markdown. Questo è rilevante solo nei
+# casi in cui vengono usati i backtick. Lo stile di markup nativo di Doxygen
+# permette a un singolo apice di terminare un frammento di testo iniziato con un
+# backtick e poi trattarlo come un pezzo di testo citato, mentre in Markdown un
+# tale frammento di testo viene trattato come verbatim e termina solo quando
+# viene trovato un secondo backtick corrispondente. Inoltre, il formato di markup
+# nativo di Doxygen richiede che le virgolette doppie siano escapate quando
+# appaiono in una sezione tra backtick, mentre questo non è necessario per
+# Markdown.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag MARKDOWN_SUPPORT sia impostato a YES.
+
+MARKDOWN_STRICT        = YES
+
+# Quando il tag TOC_INCLUDE_HEADINGS è impostato a un valore diverso da zero,
+# tutte le intestazioni fino a quel livello vengono automaticamente incluse
+# nell'indice, anche se non hanno un attributo id.
+# Nota: Questa funzionalità attualmente si applica solo alle intestazioni
+# Markdown.
+# Valore minimo: 0, valore massimo: 99, valore predefinito: 6.
+# Questo tag richiede che il tag MARKDOWN_SUPPORT sia impostato a YES.
+
+TOC_INCLUDE_HEADINGS   = 6
+
+# Il tag MARKDOWN_ID_STYLE può essere usato per specificare l'algoritmo usato
+# per generare gli identificatori per le intestazioni Markdown. Nota: Ogni
+# identificatore è univoco.
+# Valori possibili sono: DOXYGEN usa una stringa fissa 'autotoc_md' seguita da
+# un numero di sequenza che parte da 0 e GITHUB usa la versione in minuscolo del
+# titolo con qualsiasi spazio bianco sostituito da '-' e i caratteri di
+# punteggiatura rimossi.
+# Il valore predefinito è: DOXYGEN.
+# Questo tag richiede che il tag MARKDOWN_SUPPORT sia impostato a YES.
+
+MARKDOWN_ID_STYLE      = DOXYGEN
+
+# Quando abilitato Doxygen cerca di collegare parole che corrispondono a classi
+# o namespace documentati alla loro documentazione corrispondente. Un tale
+# collegamento può essere impedito in singoli casi mettendo un segno % davanti
+# alla parola o globalmente impostando AUTOLINK_SUPPORT a NO. Le parole elencate
+# nel tag AUTOLINK_IGNORE_WORDS sono escluse dal collegamento automatico.
+# Il valore predefinito è: YES.
+
+AUTOLINK_SUPPORT       = YES
+
+# Questo tag specifica un elenco di parole che, quando corrispondono all'inizio
+# di una parola nella documentazione, sopprimeranno la generazione di
+# collegamenti automatici, se abilitata tramite AUTOLINK_SUPPORT. Questo elenco
+# non influisce sui collegamenti creati esplicitamente usando # o i comandi
+# \link o \ref.
+# Questo tag richiede che il tag AUTOLINK_SUPPORT sia impostato a YES.
+
+AUTOLINK_IGNORE_WORDS  =
+
+# Se usi classi STL (cioè std::string, std::vector, ecc.) ma non vuoi includere
+# (un file tag per) i sorgenti STL come input, allora dovresti impostare questo
+# tag a YES per far sì che Doxygen abbini dichiarazioni e definizioni di funzioni
+# i cui argomenti contengono classi STL (ad es. func(std::string); versus
+# func(std::string) {}). Questo rende anche più completi e accurati i diagrammi
+# di ereditarietà e collaborazione che coinvolgono classi STL.
+# Il valore predefinito è: NO.
+
+BUILTIN_STL_SUPPORT    = NO
+
+# Se usi il linguaggio C++/CLI di Microsoft, dovresti impostare questa opzione a
+# YES per abilitare il supporto all'analisi.
+# Il valore predefinito è: NO.
+
+CPP_CLI_SUPPORT        = NO
+
+# Imposta il tag SIP_SUPPORT a YES se il tuo progetto consiste solo di sorgenti
+# sip (vedi: https://www.riverbankcomputing.com/software). Doxygen li analizzerà
+# come normale C++ ma assumerà che tutte le classi usino ereditarietà pubblica
+# invece che privata quando non è presente una parola chiave di protezione
+# esplicita.
+# Il valore predefinito è: NO.
+
+SIP_SUPPORT            = NO
+
+# Per l'IDL di Microsoft ci sono gli attributi propget e propput per indicare
+# metodi getter e setter per una proprietà. Impostare questa opzione a YES farà
+# sì che Doxygen sostituisca i metodi get e set con una proprietà nella
+# documentazione. Questo funzionerà solo se i metodi stanno effettivamente
+# ottenendo o impostando un tipo semplice. Se non è questo il caso, o vuoi
+# comunque mostrare i metodi, dovresti impostare questa opzione a NO.
+# Il valore predefinito è: YES.
+
+IDL_PROPERTY_SUPPORT   = YES
+
+# Se nella documentazione viene usato il raggruppamento di membri e il tag
+# DISTRIBUTE_GROUP_DOC è impostato a YES allora Doxygen riutilizzerà la
+# documentazione del primo membro del gruppo (se presente) per gli altri membri
+# del gruppo. Per impostazione predefinita tutti i membri di un gruppo devono
+# essere documentati esplicitamente.
+# Il valore predefinito è: NO.
+
+DISTRIBUTE_GROUP_DOC   = NO
+
+# Se si aggiunge una struct o classe a un gruppo e questa opzione è abilitata,
+# allora anche qualsiasi classe o struct annidata viene aggiunta allo stesso
+# gruppo. Per impostazione predefinita questa opzione è disabilitata e bisogna
+# aggiungere esplicitamente i composti annidati tramite \ingroup.
+# Il valore predefinito è: NO.
+
+GROUP_NESTED_COMPOUNDS = NO
+
+# Imposta il tag SUBGROUPING a YES per permettere che gruppi di membri di classe
+# dello stesso tipo (ad esempio un gruppo di funzioni pubbliche) vengano messi
+# come sottogruppo di quel tipo (ad es. sotto la sezione Public Functions).
+# Imposta a NO per impedire il sotto-raggruppamento. In alternativa, questo può
+# essere fatto per classe usando il comando \nosubgrouping.
+# Il valore predefinito è: YES.
+
+SUBGROUPING            = YES
+
+# Quando il tag INLINE_GROUPED_CLASSES è impostato a YES, classi, struct e union
+# vengono mostrate all'interno del gruppo in cui sono incluse (ad es. usando
+# \ingroup) invece che su una pagina separata (per HTML e pagine Man) o sezione
+# (per LaTeX e RTF).
+#
+# Nota che questa funzionalità non funziona in combinazione con
+# SEPARATE_MEMBER_PAGES.
+# Il valore predefinito è: NO.
+
+INLINE_GROUPED_CLASSES = NO
+
+# Quando il tag INLINE_SIMPLE_STRUCTS è impostato a YES, struct, class e union
+# con solo campi dati pubblici o campi typedef semplici verranno mostrati inline
+# nella documentazione dello scope in cui sono definiti (cioè documentazione di
+# file, namespace o gruppo), a condizione che questo scope sia documentato. Se
+# impostato a NO, struct, class e union vengono mostrati su una pagina separata
+# (per HTML e pagine Man) o sezione (per LaTeX e RTF).
+# Il valore predefinito è: NO.
+
+INLINE_SIMPLE_STRUCTS  = NO
+
+# Quando il tag TYPEDEF_HIDES_STRUCT è abilitato, un typedef di una struct, union
+# o enum viene documentato come struct, union o enum con il nome del typedef.
+# Quindi typedef struct TypeS {} TypeT, apparirà nella documentazione come una
+# struct con nome TypeT. Quando disabilitato il typedef apparirà come un membro
+# di un file, namespace o classe. E la struct sarà chiamata TypeS. Questo può
+# tipicamente essere utile per il codice C nel caso in cui la convenzione di
+# codifica imponga che tutti i tipi composti siano typedef'ati e venga
+# referenziato solo il typedef, mai il nome del tag.
+# Il valore predefinito è: NO.
+
+TYPEDEF_HIDES_STRUCT   = NO
+
+# La dimensione della cache di ricerca dei simboli può essere impostata usando
+# LOOKUP_CACHE_SIZE. Questa cache viene usata per risolvere i simboli dato il
+# loro nome e scope. Poiché questo può essere un processo costoso e spesso lo
+# stesso simbolo appare più volte nel codice, Doxygen mantiene una cache di
+# simboli pre-risolti. Se la cache è troppo piccola Doxygen diventerà più lento.
+# Se la cache è troppo grande, la memoria viene sprecata. La dimensione della
+# cache è data da questa formula: 2^(16+LOOKUP_CACHE_SIZE). L'intervallo valido è
+# 0..9, il valore predefinito è 0, corrispondente a una dimensione della cache
+# di 2^16=65536 simboli. Alla fine di un'esecuzione Doxygen riporterà l'uso
+# della cache e suggerirà la dimensione ottimale della cache dal punto di vista
+# della velocità.
+# Valore minimo: 0, valore massimo: 9, valore predefinito: 0.
+
+LOOKUP_CACHE_SIZE      = 0
+
+# Il tag NUM_PROC_THREADS specifica il numero di thread che Doxygen può usare
+# durante l'elaborazione. Quando impostato a 0 Doxygen baserà questo sul numero
+# di core disponibili nel sistema. Puoi impostarlo esplicitamente a un valore
+# maggiore di 0 per avere più controllo sull'equilibrio tra carico della CPU e
+# velocità di elaborazione. Al momento solo l'elaborazione dell'input può essere
+# fatta usando più thread. Poiché questa è ancora una funzionalità sperimentale
+# il valore predefinito è impostato a 1, che di fatto disabilita l'elaborazione
+# parallela. Ti preghiamo di segnalare qualsiasi problema tu incontri. La
+# generazione di grafici dot in parallelo è controllata dall'impostazione
+# DOT_NUM_THREADS.
+# Valore minimo: 0, valore massimo: 512, valore predefinito: 1.
+
+NUM_PROC_THREADS       = 1
+
+# Se il tag TIMESTAMP è impostato a un valore diverso da NO allora ogni pagina
+# generata conterrà la data o data e ora in cui la pagina è stata generata.
+# Impostarlo a NO può aiutare quando si confronta l'output di più esecuzioni.
+# Valori possibili sono: YES, NO, DATETIME e DATE.
+# Il valore predefinito è: NO.
+
+TIMESTAMP              = NO
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative alla build
+#---------------------------------------------------------------------------
+
+# Se il tag EXTRACT_ALL è impostato a YES, Doxygen assumerà che tutte le entità
+# nella documentazione siano documentate, anche se non era disponibile alcuna
+# documentazione. I membri privati di classe e i membri statici di file saranno
+# nascosti a meno che i tag EXTRACT_PRIVATE rispettivamente EXTRACT_STATIC non
+# siano impostati a YES.
+# Nota: Questo disabiliterà anche gli avvisi sui membri non documentati che
+# vengono normalmente prodotti quando WARNINGS è impostato a YES.
+# Il valore predefinito è: NO.
+
+EXTRACT_ALL            = NO
+
+# Se il tag EXTRACT_PRIVATE è impostato a YES, tutti i membri privati di una
+# classe verranno inclusi nella documentazione.
+# Il valore predefinito è: NO.
+
+EXTRACT_PRIVATE        = NO
+
+# Se il tag EXTRACT_PRIV_VIRTUAL è impostato a YES, i metodi virtuali privati
+# documentati di una classe verranno inclusi nella documentazione.
+# Il valore predefinito è: NO.
+
+EXTRACT_PRIV_VIRTUAL   = NO
+
+# Se il tag EXTRACT_PACKAGE è impostato a YES, tutti i membri con scope package
+# o interno verranno inclusi nella documentazione.
+# Il valore predefinito è: NO.
+
+EXTRACT_PACKAGE        = NO
+
+# Se il tag EXTRACT_STATIC è impostato a YES, tutti i membri statici di un file
+# verranno inclusi nella documentazione.
+# Il valore predefinito è: NO.
+
+EXTRACT_STATIC         = NO
+
+# Se il tag EXTRACT_LOCAL_CLASSES è impostato a YES, le classi (e struct)
+# definite localmente nei file sorgente verranno incluse nella documentazione.
+# Se impostato a NO, verranno incluse solo le classi definite nei file di
+# intestazione. Non ha alcun effetto per i sorgenti Java.
+# Il valore predefinito è: YES.
+
+EXTRACT_LOCAL_CLASSES  = YES
+
+# Questo flag è utile solo per il codice Objective-C. Se impostato a YES, i
+# metodi locali, che sono definiti nella sezione di implementazione ma non
+# nell'interfaccia, vengono inclusi nella documentazione. Se impostato a NO,
+# vengono inclusi solo i metodi nell'interfaccia.
+# Il valore predefinito è: NO.
+
+EXTRACT_LOCAL_METHODS  = NO
+
+# Se questo flag è impostato a YES, i membri dei namespace anonimi verranno
+# estratti e appariranno nella documentazione come un namespace chiamato
+# 'anonymous_namespace{file}', dove file verrà sostituito con il nome base del
+# file che contiene il namespace anonimo. Per impostazione predefinita i
+# namespace anonimi sono nascosti.
+# Il valore predefinito è: NO.
+
+EXTRACT_ANON_NSPACES   = NO
+
+# Se questo flag è impostato a YES, il nome di un parametro senza nome in una
+# dichiarazione verrà determinato dalla definizione corrispondente. Per
+# impostazione predefinita i parametri senza nome rimangono senza nome
+# nell'output.
+# Il valore predefinito è: YES.
+
+RESOLVE_UNNAMED_PARAMS = YES
+
+# Se il tag HIDE_UNDOC_MEMBERS è impostato a YES, Doxygen nasconderà tutti i
+# membri non documentati all'interno di classi o file documentati. Se impostato
+# a NO questi membri verranno inclusi nelle varie panoramiche, ma non verrà
+# generata alcuna sezione di documentazione. Questa opzione non ha effetto se
+# EXTRACT_ALL è abilitato.
+# Il valore predefinito è: NO.
+
+HIDE_UNDOC_MEMBERS     = NO
+
+# Se il tag HIDE_UNDOC_CLASSES è impostato a YES, Doxygen nasconderà tutte le
+# classi non documentate che sono normalmente visibili nella gerarchia delle
+# classi. Se impostato a NO, queste classi verranno incluse nelle varie
+# panoramiche. Questa opzione nasconderà anche i concetti C++ non documentati se
+# abilitata. Questa opzione non ha effetto se EXTRACT_ALL è abilitato.
+# Il valore predefinito è: NO.
+
+HIDE_UNDOC_CLASSES     = NO
+
+# Se il tag HIDE_UNDOC_NAMESPACES è impostato a YES, Doxygen nasconderà tutti i
+# namespace non documentati che sono normalmente visibili nella gerarchia dei
+# namespace. Se impostato a NO, questi namespace verranno inclusi nelle varie
+# panoramiche. Questa opzione non ha effetto se EXTRACT_ALL è abilitato.
+# Il valore predefinito è: YES.
+
+HIDE_UNDOC_NAMESPACES  = YES
+
+# Se il tag HIDE_FRIEND_COMPOUNDS è impostato a YES, Doxygen nasconderà tutte le
+# dichiarazioni friend. Se impostato a NO, queste dichiarazioni verranno incluse
+# nella documentazione.
+# Il valore predefinito è: NO.
+
+HIDE_FRIEND_COMPOUNDS  = NO
+
+# Se il tag HIDE_IN_BODY_DOCS è impostato a YES, Doxygen nasconderà qualsiasi
+# blocco di documentazione trovato all'interno del corpo di una funzione. Se
+# impostato a NO, questi blocchi verranno aggiunti al blocco di documentazione
+# dettagliata della funzione.
+# Il valore predefinito è: NO.
+
+HIDE_IN_BODY_DOCS      = NO
+
+# Il tag INTERNAL_DOCS determina se la documentazione scritta dopo un comando
+# \internal viene inclusa. Se il tag è impostato a NO allora la documentazione
+# verrà esclusa. Impostalo a YES per includere la documentazione interna.
+# Il valore predefinito è: NO.
+
+INTERNAL_DOCS          = NO
+
+# Con l'impostazione corretta dell'opzione CASE_SENSE_NAMES Doxygen sarà più in
+# grado di adattarsi alle capacità del file system sottostante. Nel caso in cui
+# il file system sia case sensitive (cioè supporti file nella stessa directory i
+# cui nomi differiscono solo per le maiuscole/minuscole), l'opzione deve essere
+# impostata a YES per gestire correttamente tali file nel caso appaiano
+# nell'input. Per i file system che non sono case sensitive l'opzione dovrebbe
+# essere impostata a NO per gestire correttamente i file di output scritti per
+# simboli che differiscono solo per le maiuscole/minuscole, come per due classi,
+# una chiamata CLASS e l'altra chiamata Class, e per supportare anche
+# riferimenti a file senza dover specificare l'esatta combinazione di
+# maiuscole/minuscole. Su Windows (incluso Cygwin) e macOS, gli utenti
+# dovrebbero tipicamente impostare questa opzione a NO, mentre su Linux o altri
+# flavor Unix dovrebbe tipicamente essere impostata a YES.
+# Valori possibili sono: SYSTEM, NO e YES.
+# Il valore predefinito è: SYSTEM.
+
+CASE_SENSE_NAMES       = SYSTEM
+
+# Se il tag HIDE_SCOPE_NAMES è impostato a NO allora Doxygen mostrerà i membri
+# con i loro scope completi di classe e namespace nella documentazione. Se
+# impostato a YES, lo scope verrà nascosto.
+# Il valore predefinito è: NO.
+
+HIDE_SCOPE_NAMES       = NO
+
+# Se il tag HIDE_COMPOUND_REFERENCE è impostato a NO (predefinito) allora Doxygen
+# aggiungerà testo aggiuntivo al titolo di una pagina, come Class Reference. Se
+# impostato a YES il riferimento composto verrà nascosto.
+# Il valore predefinito è: NO.
+
+HIDE_COMPOUND_REFERENCE= NO
+
+# Se il tag SHOW_HEADERFILE è impostato a YES allora la documentazione per una
+# classe mostrerà quale file deve essere incluso per usare la classe.
+# Il valore predefinito è: YES.
+
+SHOW_HEADERFILE        = YES
+
+# Se il tag SHOW_INCLUDE_FILES è impostato a YES allora Doxygen inserirà un
+# elenco dei file che sono inclusi da un file nella documentazione di quel file.
+# Il valore predefinito è: YES.
+
+SHOW_INCLUDE_FILES     = YES
+
+# Se il tag SHOW_GROUPED_MEMB_INC è impostato a YES allora Doxygen aggiungerà per
+# ogni membro raggruppato un'istruzione include alla documentazione, dicendo al
+# lettore quale file includere per usare il membro.
+# Il valore predefinito è: NO.
+
+SHOW_GROUPED_MEMB_INC  = NO
+
+# Se il tag FORCE_LOCAL_INCLUDES è impostato a YES allora Doxygen elencherà i
+# file di inclusione con virgolette doppie nella documentazione piuttosto che con
+# parentesi angolari.
+# Il valore predefinito è: NO.
+
+FORCE_LOCAL_INCLUDES   = NO
+
+# Se il tag INLINE_INFO è impostato a YES allora un tag [inline] viene inserito
+# nella documentazione per i membri inline.
+# Il valore predefinito è: YES.
+
+INLINE_INFO            = YES
+
+# Se il tag SORT_MEMBER_DOCS è impostato a YES allora Doxygen ordinerà la
+# documentazione (dettagliata) di membri di file e classi alfabeticamente per
+# nome del membro. Se impostato a NO, i membri appariranno nell'ordine di
+# dichiarazione.
+# Il valore predefinito è: YES.
+
+SORT_MEMBER_DOCS       = YES
+
+# Se il tag SORT_BRIEF_DOCS è impostato a YES allora Doxygen ordinerà le
+# descrizioni brevi di membri di file, namespace e classi alfabeticamente per
+# nome del membro. Se impostato a NO, i membri appariranno nell'ordine di
+# dichiarazione. Nota che questo influenzerà anche l'ordine delle classi
+# nell'elenco delle classi.
+# Il valore predefinito è: NO.
+
+SORT_BRIEF_DOCS        = NO
+
+# Se il tag SORT_MEMBERS_CTORS_1ST è impostato a YES allora Doxygen ordinerà la
+# documentazione (breve e dettagliata) dei membri di classe in modo che
+# costruttori e distruttori siano elencati per primi. Se impostato a NO i
+# costruttori appariranno nei rispettivi ordini definiti da SORT_BRIEF_DOCS e
+# SORT_MEMBER_DOCS.
+# Nota: Se SORT_BRIEF_DOCS è impostato a NO questa opzione viene ignorata per
+# l'ordinamento della documentazione breve dei membri.
+# Nota: Se SORT_MEMBER_DOCS è impostato a NO questa opzione viene ignorata per
+# l'ordinamento della documentazione dettagliata dei membri.
+# Il valore predefinito è: NO.
+
+SORT_MEMBERS_CTORS_1ST = NO
+
+# Se il tag SORT_GROUP_NAMES è impostato a YES allora Doxygen ordinerà la
+# gerarchia dei nomi dei gruppi in ordine alfabetico. Se impostato a NO i nomi
+# dei gruppi appariranno nell'ordine in cui sono definiti.
+# Il valore predefinito è: NO.
+
+SORT_GROUP_NAMES       = NO
+
+# Se il tag SORT_BY_SCOPE_NAME è impostato a YES, l'elenco delle classi verrà
+# ordinato per nomi completamente qualificati, inclusi i namespace. Se impostato
+# a NO, l'elenco delle classi verrà ordinato solo per nome della classe, non
+# includendo la parte del namespace.
+# Nota: Questa opzione non è molto utile se HIDE_SCOPE_NAMES è impostato a YES.
+# Nota: Questa opzione si applica solo all'elenco delle classi, non all'elenco
+# alfabetico.
+# Il valore predefinito è: NO.
+
+SORT_BY_SCOPE_NAME     = NO
+
+# Se l'opzione STRICT_PROTO_MATCHING è abilitata e Doxygen non riesce a fare una
+# corretta risoluzione dei tipi di tutti i parametri di una funzione, rifiuterà
+# una corrispondenza tra il prototipo e l'implementazione di una funzione membro
+# anche se c'è solo un candidato o è ovvio quale candidato scegliere facendo un
+# semplice confronto di stringhe. Disabilitando STRICT_PROTO_MATCHING Doxygen
+# accetterà comunque una corrispondenza tra prototipo e implementazione in tali
+# casi.
+# Il valore predefinito è: NO.
+
+STRICT_PROTO_MATCHING  = NO
+
+# Il tag GENERATE_TODOLIST può essere usato per abilitare (YES) o disabilitare
+# (NO) la lista delle cose da fare. Questa lista viene creata inserendo comandi
+# \todo nella documentazione.
+# Il valore predefinito è: YES.
+
+GENERATE_TODOLIST      = YES
+
+# Il tag GENERATE_TESTLIST può essere usato per abilitare (YES) o disabilitare
+# (NO) la lista dei test. Questa lista viene creata inserendo comandi \test nella
+# documentazione.
+# Il valore predefinito è: YES.
+
+GENERATE_TESTLIST      = YES
+
+# Il tag GENERATE_BUGLIST può essere usato per abilitare (YES) o disabilitare
+# (NO) la lista dei bug. Questa lista viene creata inserendo comandi \bug nella
+# documentazione.
+# Il valore predefinito è: YES.
+
+GENERATE_BUGLIST       = YES
+
+# Il tag GENERATE_DEPRECATEDLIST può essere usato per abilitare (YES) o
+# disabilitare (NO) la lista delle deprecazioni. Questa lista viene creata
+# inserendo comandi \deprecated nella documentazione.
+# Il valore predefinito è: YES.
+
+GENERATE_DEPRECATEDLIST= YES
+
+# Il tag GENERATE_REQUIREMENTS può essere usato per abilitare (YES) o
+# disabilitare (NO) la pagina dei requisiti. Quando abilitata, questa pagina
+# viene creata automaticamente quando appare almeno un blocco di commento con un
+# comando \requirement nell'input.
+# Il valore predefinito è: YES.
+
+GENERATE_REQUIREMENTS  = YES
+
+# Il tag REQ_TRACEABILITY_INFO controlla se le informazioni di tracciabilità
+# vengono mostrate nella pagina dei requisiti (rilevante solo quando si usano
+# blocchi di commento \requirement). L'impostazione NO disabiliterà
+# completamente le informazioni di tracciabilità. L'impostazione
+# UNSATISFIED_ONLY mostrerà un elenco di requisiti a cui manca una relazione
+# satisfies (tramite il comando: \satisfies). Analogamente l'impostazione
+# UNVERIFIED_ONLY mostrerà un elenco di requisiti a cui manca una relazione
+# verifies (tramite il comando: \verifies). Impostando il tag a YES (il valore
+# predefinito) verranno mostrati entrambi gli elenchi se applicabile.
+# Valori possibili sono: YES, NO, UNSATISFIED_ONLY e UNVERIFIED_ONLY.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_REQUIREMENTS sia impostato a YES.
+
+REQ_TRACEABILITY_INFO  = YES
+
+# Il tag ENABLED_SECTIONS può essere usato per abilitare sezioni di
+# documentazione condizionali, contrassegnate da \if <section_label> ... \endif
+# e blocchi \cond <section_label> ... \endcond.
+
+ENABLED_SECTIONS       =
+
+# Il tag MAX_INITIALIZER_LINES determina il numero massimo di righe che il valore
+# iniziale di una variabile o macro / define può avere per apparire nella
+# documentazione. Se l'inizializzatore consiste di più righe di quelle
+# specificate qui verrà nascosto. Usa un valore di 0 per nascondere
+# completamente gli inizializzatori. L'aspetto del valore di singole variabili e
+# macro / define può essere controllato usando il comando \showinitializer o
+# \hideinitializer nella documentazione indipendentemente da questa
+# impostazione.
+# Valore minimo: 0, valore massimo: 10000, valore predefinito: 30.
+
+MAX_INITIALIZER_LINES  = 30
+
+# Imposta il tag SHOW_USED_FILES a NO per disabilitare l'elenco dei file generati
+# in fondo alla documentazione di classi e struct. Se impostato a YES, l'elenco
+# menzionerà i file che sono stati usati per generare la documentazione.
+# Il valore predefinito è: YES.
+
+SHOW_USED_FILES        = YES
+
+# Imposta il tag SHOW_FILES a NO per disabilitare la generazione della pagina
+# Files. Questo rimuoverà la voce Files dall'Indice rapido e dalla Vista ad
+# albero delle cartelle (se specificata).
+# Il valore predefinito è: YES.
+
+SHOW_FILES             = YES
+
+# Imposta il tag SHOW_NAMESPACES a NO per disabilitare la generazione della
+# pagina Namespaces. Questo rimuoverà la voce Namespaces dall'Indice rapido e
+# dalla Vista ad albero delle cartelle (se specificata).
+# Il valore predefinito è: YES.
+
+SHOW_NAMESPACES        = YES
+
+# Il tag FILE_VERSION_FILTER può essere usato per specificare un programma o
+# script che Doxygen dovrebbe invocare per ottenere la versione corrente per ogni
+# file (tipicamente dal sistema di controllo versione). Doxygen invocherà il
+# programma eseguendo (tramite popen()) il comando command input_file, dove
+# command è il valore del tag FILE_VERSION_FILTER, e input_file è il nome di un
+# file di input fornito da Doxygen. Qualsiasi cosa il programma scriva su stdout
+# viene usata come versione del file. Per un esempio vedi la documentazione.
+
+FILE_VERSION_FILTER    =
+
+# Il tag LAYOUT_FILE può essere usato per specificare un file di layout che verrà
+# analizzato da Doxygen. Il file di layout controlla la struttura globale dei
+# file di output generati in modo indipendente dal formato di output. Per creare
+# il file di layout che rappresenta i valori predefiniti di Doxygen, esegui
+# Doxygen con l'opzione -l. Puoi opzionalmente specificare un nome di file dopo
+# l'opzione, se omesso verrà usato DoxygenLayout.xml come nome del file di
+# layout. Vedi anche la sezione "Changing the layout of pages" per informazioni.
+#
+# Nota che se esegui Doxygen da una directory contenente un file chiamato
+# DoxygenLayout.xml, Doxygen lo analizzerà automaticamente anche se il tag
+# LAYOUT_FILE è lasciato vuoto.
+
+LAYOUT_FILE            =
+
+# Il tag CITE_BIB_FILES può essere usato per specificare uno o più file bib
+# contenenti le definizioni dei riferimenti. Questa deve essere una lista di file
+# .bib. L'estensione .bib viene aggiunta automaticamente se omessa. Questo
+# richiede che lo strumento bibtex sia installato. Vedi anche
+# https://en.wikipedia.org/wiki/BibTeX per maggiori informazioni. Per LaTeX lo
+# stile della bibliografia può essere controllato usando LATEX_BIB_STYLE. Per
+# usare questa funzionalità hai bisogno di bibtex e perl disponibili nel percorso
+# di ricerca. Vedi anche \cite per informazioni su come creare riferimenti.
+
+CITE_BIB_FILES         =
+
+# Il tag EXTERNAL_TOOL_PATH può essere usato per estendere il percorso di ricerca
+# (variabile d'ambiente PATH) in modo che strumenti esterni come latex e gs
+# possano essere trovati.
+# Nota: Le directory specificate con EXTERNAL_TOOL_PATH vengono aggiunte davanti
+# al percorso già specificato dalla variabile PATH, e vengono aggiunte nell'ordine
+# specificato.
+# Nota: Questa opzione è particolarmente utile per macOS versione 14 (Sonoma) e
+# successive, quando si esegue Doxygen da Doxywizard, perché in questo caso
+# qualsiasi modifica del PATH definita dall'utente viene ignorata. Un tipico
+# esempio su macOS è impostare
+# EXTERNAL_TOOL_PATH = /Library/TeX/texbin /usr/local/bin
+# insieme al percorso standard, il percorso di ricerca completo usato da doxygen
+# quando avvia strumenti esterni diventerà quindi
+# PATH=/Library/TeX/texbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+EXTERNAL_TOOL_PATH     =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative ai messaggi di avviso e di avanzamento
+#---------------------------------------------------------------------------
+
+# Il tag QUIET può essere usato per attivare/disattivare i messaggi generati su
+# stdout da Doxygen. Se QUIET è impostato a YES questo implica che i messaggi
+# sono disattivati.
+# Il valore predefinito è: NO.
+
+QUIET                  = NO
+
+# Il tag WARNINGS può essere usato per attivare/disattivare i messaggi di avviso
+# generati su stderr da Doxygen. Se WARNINGS è impostato a YES questo implica che
+# gli avvisi sono attivi.
+#
+# Suggerimento: Attiva gli avvisi mentre scrivi la documentazione.
+# Il valore predefinito è: YES.
+
+WARNINGS               = YES
+
+# Se il tag WARN_IF_UNDOCUMENTED è impostato a YES allora Doxygen genererà avvisi
+# per i membri non documentati. Se EXTRACT_ALL è impostato a YES allora questo
+# flag verrà automaticamente disabilitato.
+# Il valore predefinito è: YES.
+
+WARN_IF_UNDOCUMENTED   = YES
+
+# Se il tag WARN_IF_DOC_ERROR è impostato a YES, Doxygen genererà avvisi per
+# potenziali errori nella documentazione, come documentare alcuni parametri in
+# una funzione documentata due volte, o documentare parametri che non esistono o
+# usare comandi di markup in modo errato.
+# Il valore predefinito è: YES.
+
+WARN_IF_DOC_ERROR      = YES
+
+# Se WARN_IF_INCOMPLETE_DOC è impostato a YES, Doxygen avviserà circa la
+# documentazione incompleta dei parametri di funzione. Se impostato a NO, Doxygen
+# accetterà che alcuni parametri non abbiano documentazione senza avvisare.
+# Il valore predefinito è: YES.
+
+WARN_IF_INCOMPLETE_DOC = YES
+
+# Questa opzione WARN_NO_PARAMDOC può essere abilitata per ottenere avvisi per
+# funzioni che sono documentate, ma non hanno documentazione per i loro parametri
+# o valore di ritorno. Se impostato a NO, Doxygen avviserà solo circa la
+# documentazione errata dei parametri, ma non circa l'assenza di documentazione.
+# Se EXTRACT_ALL è impostato a YES allora questo flag verrà automaticamente
+# disabilitato. Vedi anche WARN_IF_INCOMPLETE_DOC
+# Il valore predefinito è: NO.
+
+WARN_NO_PARAMDOC       = NO
+
+# Se l'opzione WARN_IF_UNDOC_ENUM_VAL è impostata a YES, Doxygen avviserà circa i
+# valori di enumerazione non documentati. Se impostato a NO, Doxygen accetterà
+# valori di enumerazione non documentati. Se EXTRACT_ALL è impostato a YES allora
+# questo flag verrà automaticamente disabilitato.
+# Il valore predefinito è: NO.
+
+WARN_IF_UNDOC_ENUM_VAL = NO
+
+# Se l'opzione WARN_LAYOUT_FILE è impostata a YES, Doxygen avviserà circa i
+# problemi trovati durante l'analisi del file di layout definito dall'utente,
+# come elementi mancanti o errati. Vedi anche LAYOUT_FILE per i dettagli. Se
+# impostato a NO, i problemi con il file di layout verranno soppressi.
+# Il valore predefinito è: YES.
+
+WARN_LAYOUT_FILE       = YES
+
+# Se il tag WARN_AS_ERROR è impostato a YES allora Doxygen si fermerà
+# immediatamente quando viene incontrato un avviso. Se il tag WARN_AS_ERROR è
+# impostato a FAIL_ON_WARNINGS allora Doxygen continuerà a funzionare come se il
+# tag WARN_AS_ERROR fosse impostato a NO, ma alla fine del processo Doxygen
+# ritornerà con uno stato non zero. Se il tag WARN_AS_ERROR è impostato a
+# FAIL_ON_WARNINGS_PRINT allora Doxygen si comporta come FAIL_ON_WARNINGS ma nel
+# caso in cui nessun WARN_LOGFILE sia definito Doxygen non scriverà i messaggi di
+# avviso tra gli altri messaggi ma li scriverà alla fine di un'esecuzione, nel
+# caso in cui sia definito un WARN_LOGFILE i messaggi di avviso saranno oltre che
+# nel file definito anche mostrati alla fine di un'esecuzione, a meno che il
+# WARN_LOGFILE non sia definito come - cioè standard output (stdout) in quel caso
+# il comportamento rimarrà come con l'impostazione FAIL_ON_WARNINGS.
+# Valori possibili sono: NO, YES, FAIL_ON_WARNINGS e FAIL_ON_WARNINGS_PRINT.
+# Il valore predefinito è: NO.
+
+WARN_AS_ERROR          = NO
+
+# Il tag WARN_FORMAT determina il formato dei messaggi di avviso che Doxygen può
+# produrre. La stringa dovrebbe contenere i tag $file, $line e $text, che
+# verranno sostituiti dal file e dal numero di riga da cui ha avuto origine
+# l'avviso e dal testo dell'avviso. Opzionalmente il formato può contenere
+# $version, che verrà sostituito dalla versione del file (se è stato possibile
+# ottenerla tramite FILE_VERSION_FILTER)
+# Vedi anche: WARN_LINE_FORMAT
+# Il valore predefinito è: $file:$line: $text.
+
+WARN_FORMAT            = "$file:$line: $text"
+
+# Nella parte $text del comando WARN_FORMAT è possibile che venga data una
+# riferimento a un luogo più specifico. Per rendere più facile saltare a questo
+# luogo (al di fuori di Doxygen) l'utente può definire una stringa personalizzata
+# di "taglia" / "incolla". Esempio:
+# WARN_LINE_FORMAT = "'vi $file +$line'"
+# Vedi anche: WARN_FORMAT
+# Il valore predefinito è: at line $line of file $file.
+
+WARN_LINE_FORMAT       = "at line $line of file $file"
+
+# Il tag WARN_LOGFILE può essere usato per specificare un file in cui devono
+# essere scritti i messaggi di avviso ed errore. Se lasciato vuoto l'output viene
+# scritto su standard error (stderr). Nel caso in cui il file specificato non
+# possa essere aperto per la scrittura i messaggi di avviso ed errore vengono
+# scritti su standard error. Quando come file viene specificato - i messaggi di
+# avviso ed errore vengono scritti su standard output (stdout).
+
+WARN_LOGFILE           =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative ai file di input
+#---------------------------------------------------------------------------
+
+# Il tag INPUT viene usato per specificare i file e/o le directory che contengono
+# i file sorgente documentati. Puoi inserire nomi di file come myfile.cpp o
+# directory come /usr/src/myproject. Separare i file o le directory con spazi.
+# Vedi anche FILE_PATTERNS e EXTENSION_MAPPING
+# Nota: Se questo tag è vuoto viene cercata la directory corrente.
+
+INPUT                  = ..\
+
+# Questo tag può essere usato per specificare la codifica dei caratteri dei
+# file sorgente che Doxygen analizza. Internamente Doxygen usa la codifica UTF-8.
+# Doxygen usa libiconv (o la iconv integrata in libc) per la transcodifica. Vedi
+# la documentazione di libiconv (vedi:
+# https://www.gnu.org/software/libiconv/) per l'elenco delle codifiche possibili.
+# Vedi anche: INPUT_FILE_ENCODING
+# Il valore predefinito è: UTF-8.
+
+INPUT_ENCODING         = UTF-8
+
+# Questo tag può essere usato per specificare la codifica dei caratteri dei file
+# sorgente che Doxygen analizza. Il tag INPUT_FILE_ENCODING può essere usato per
+# specificare la codifica dei caratteri per modello di file. Doxygen confronterà
+# il nome del file con ogni modello e applicherà la codifica invece della
+# codifica predefinita INPUT_ENCODING se c'è una corrispondenza. Le codifiche dei
+# caratteri sono una lista nella forma: pattern=encoding (come
+# *.php=ISO-8859-1).
+# Vedi anche: INPUT_ENCODING per ulteriori informazioni sulle codifiche
+# supportate.
+
+INPUT_FILE_ENCODING    =
+
+# Se il valore del tag INPUT contiene directory, puoi usare il tag FILE_PATTERNS
+# per specificare uno o più modelli jolly (come *.cpp e *.h) per filtrare i file
+# sorgente nelle directory.
+#
+# Nota che per estensioni personalizzate o estensioni non direttamente supportate
+# devi anche impostare EXTENSION_MAPPING per l'estensione altrimenti i file non
+# vengono letti da Doxygen.
+#
+# Nota che l'elenco dei modelli di file predefiniti selezionati potrebbe
+# differire dall'elenco delle mappature di estensioni di file predefinite.
+#
+# Se lasciato vuoto vengono testati i seguenti modelli: *.c, *.cc, *.cxx,
+# *.cxxm, *.cpp, *.cppm, *.ccm, *.c++, *.c++m, *.java, *.ii, *.ixx, *.ipp,
+# *.i++, *.inl, *.idl, *.ddl, *.odl, *.h, *.hh, *.hxx, *.hpp, *.h++, *.l, *.cs,
+# *.d, *.php, *.php4, *.php5, *.phtml, *.inc, *.m, *.markdown, *.md, *.mm,
+# *.dox (da fornire come commento Doxygen C), *.py, *.pyw, *.f90, *.f95, *.f03,
+# *.f08, *.f18, *.f, *.for, *.vhd, *.vhdl, *.ucf, *.qsf e *.ice.
+
+FILE_PATTERNS          = *.c \
+                         *.cc \
+                         *.cxx \
+                         *.cxxm \
+                         *.cpp \
+                         *.cppm \
+                         *.ccm \
+                         *.c++ \
+                         *.c++m \
+                         *.java \
+                         *.ii \
+                         *.ixx \
+                         *.ipp \
+                         *.i++ \
+                         *.inl \
+                         *.idl \
+                         *.ddl \
+                         *.odl \
+                         *.h \
+                         *.hh \
+                         *.hxx \
+                         *.hpp \
+                         *.h++ \
+                         *.l \
+                         *.cs \
+                         *.d \
+                         *.php \
+                         *.php4 \
+                         *.php5 \
+                         *.phtml \
+                         *.inc \
+                         *.m \
+                         *.markdown \
+                         *.md \
+                         *.mm \
+                         *.dox \
+                         *.py \
+                         *.pyw \
+                         *.f90 \
+                         *.f95 \
+                         *.f03 \
+                         *.f08 \
+                         *.f18 \
+                         *.f \
+                         *.for \
+                         *.vhd \
+                         *.vhdl \
+                         *.ucf \
+                         *.qsf \
+                         *.ice
+
+# Il tag RECURSIVE può essere usato per specificare se le sottodirectory devono
+# essere cercate per i file di input.
+# Il valore predefinito è: NO.
+
+RECURSIVE              = NO
+
+# Il tag EXCLUDE può essere usato per specificare file e/o directory che devono
+# essere esclusi dai file sorgente INPUT. In questo modo puoi facilmente
+# escludere una sottodirectory da un albero di directory la cui radice è
+# specificata con il tag INPUT.
+#
+# Nota che i percorsi relativi sono relativi alla directory da cui viene
+# eseguito Doxygen.
+
+EXCLUDE                =
+
+# Il tag EXCLUDE_SYMLINKS può essere usato per selezionare se i file o le
+# directory che sono collegamenti simbolici (una funzionalità del file system
+# Unix) sono esclusi dall'input.
+# Il valore predefinito è: NO.
+
+EXCLUDE_SYMLINKS       = NO
+
+# Se il valore del tag INPUT contiene directory, puoi usare il tag
+# EXCLUDE_PATTERNS per specificare uno o più modelli jolly per escludere
+# determinati file da quelle directory.
+#
+# Nota che i caratteri jolly vengono confrontati con il file con percorso
+# assoluto, quindi per escludere tutte le directory di test ad esempio usa il
+# modello */test/*
+
+EXCLUDE_PATTERNS       =
+
+# Il tag EXCLUDE_SYMBOLS può essere usato per specificare uno o più nomi di
+# simboli (namespace, classi, funzioni, ecc.) che devono essere esclusi
+# dall'output. Il nome del simbolo può essere un nome completamente qualificato,
+# una parola, o se viene usato il jolly *, una sottostringa. Esempi: ANamespace,
+# AClass, ANamespace::AClass, ANamespace::*Test
+
+EXCLUDE_SYMBOLS        =
+
+# Il tag EXAMPLE_PATH può essere usato per specificare uno o più file o directory
+# che contengono frammenti di codice di esempio che vengono inclusi (vedi il
+# comando \include).
+
+EXAMPLE_PATH           =
+
+# Se il valore del tag EXAMPLE_PATH contiene directory, puoi usare il tag
+# EXAMPLE_PATTERNS per specificare uno o più modelli jolly (come *.cpp e *.h) per
+# filtrare i file sorgente nelle directory. Se lasciato vuoto tutti i file
+# vengono inclusi.
+
+EXAMPLE_PATTERNS       = *
+
+# Se il tag EXAMPLE_RECURSIVE è impostato a YES allora le sottodirectory verranno
+# cercate per i file di input da usare con i comandi \include o \dontinclude
+# indipendentemente dal valore di RECURSIVE.
+# Il valore predefinito è: NO.
+
+EXAMPLE_RECURSIVE      = NO
+
+# Il tag IMAGE_PATH può essere usato per specificare uno o più file o directory
+# che contengono immagini da includere nella documentazione (vedi il comando
+# \image).
+
+IMAGE_PATH             =
+
+# Il tag INPUT_FILTER può essere usato per specificare un programma che Doxygen
+# dovrebbe invocare per filtrare ogni file di input. Doxygen invocherà il
+# programma di filtro eseguendo (tramite popen()) il comando:
+#
+# <filter> <input-file>
+#
+# dove <filter> è il valore del tag INPUT_FILTER, e <input-file> è il nome di un
+# file di input. Doxygen userà allora l'output che il programma di filtro scrive
+# su standard output. Se FILTER_PATTERNS è specificato, questo tag verrà
+# ignorato.
+#
+# Nota che il filtro non deve aggiungere o rimuovere righe; viene applicato prima
+# che il codice venga analizzato, ma non quando viene generato il codice di
+# output. Se vengono aggiunte o rimosse righe, le ancore non verranno posizionate
+# correttamente.
+#
+# Nota che Doxygen userà i dati elaborati e scritti su standard output per
+# ulteriori elaborazioni, quindi nient'altro, come istruzioni di debug o comandi
+# usati (quindi nel caso di un file batch Windows usa sempre @echo OFF), dovrebbe
+# essere scritto su standard output.
+#
+# Nota che per estensioni personalizzate o estensioni non direttamente supportate
+# devi anche impostare EXTENSION_MAPPING per l'estensione altrimenti i file non
+# verranno elaborati correttamente da Doxygen.
+
+INPUT_FILTER           =
+
+# Il tag FILTER_PATTERNS può essere usato per specificare filtri su base di
+# modello di file. Doxygen confronterà il nome del file con ogni modello e
+# applicherà il filtro se c'è una corrispondenza. I filtri sono una lista nella
+# forma: pattern=filter (come *.cpp=my_cpp_filter). Vedi INPUT_FILTER per
+# ulteriori informazioni su come vengono usati i filtri. Se il tag
+# FILTER_PATTERNS è vuoto o se nessuno dei modelli corrisponde al nome del file,
+# viene applicato INPUT_FILTER.
+#
+# Nota che per estensioni personalizzate o estensioni non direttamente supportate
+# devi anche impostare EXTENSION_MAPPING per l'estensione altrimenti i file non
+# verranno elaborati correttamente da Doxygen.
+
+FILTER_PATTERNS        =
+
+# Se il tag FILTER_SOURCE_FILES è impostato a YES, il filtro di input (se
+# impostato usando INPUT_FILTER) verrà usato anche per filtrare i file di input
+# che vengono usati per produrre i file sorgente da sfogliare (cioè quando
+# SOURCE_BROWSER è impostato a YES).
+# Il valore predefinito è: NO.
+
+FILTER_SOURCE_FILES    = NO
+
+# Il tag FILTER_SOURCE_PATTERNS può essere usato per specificare filtri sorgente
+# per modello di file. Un modello sovrascriverà l'impostazione per
+# FILTER_PATTERN (se presente) ed è anche possibile disabilitare il filtraggio
+# sorgente per un modello specifico usando *.ext= (quindi senza nominare un
+# filtro).
+# Questo tag richiede che il tag FILTER_SOURCE_FILES sia impostato a YES.
+
+FILTER_SOURCE_PATTERNS =
+
+# Se il tag USE_MDFILE_AS_MAINPAGE si riferisce al nome di un file markdown che
+# fa parte dell'input, il suo contenuto verrà posizionato sulla pagina principale
+# (index.html). Questo può essere utile se hai un progetto ad esempio su GitHub e
+# vuoi riutilizzare la pagina di introduzione anche per l'output di Doxygen.
+
+USE_MDFILE_AS_MAINPAGE =
+
+# Se il tag IMPLICIT_DIR_DOCS è impostato a YES, qualsiasi file README.md trovato
+# nelle sottodirectory della radice del progetto viene usato come documentazione
+# per quella sottodirectory, tranne quando il README.md inizia con un comando
+# \dir, \page o \mainpage. Se impostato a NO, il file README.md deve iniziare con
+# un comando \dir esplicito per essere usato come documentazione della directory.
+# Il valore predefinito è: YES.
+
+IMPLICIT_DIR_DOCS      = YES
+
+# Lo standard Fortran specifica che per il codice Fortran a formato fisso tutti i
+# caratteri dalla posizione 72 devono essere considerati come commento. Un'estensione
+# comune è permettere righe più lunghe prima che il commento automatico inizi.
+# L'impostazione FORTRAN_COMMENT_AFTER renderà anche possibile che righe più
+# lunghe possano essere elaborate prima che il commento automatico inizi.
+# Valore minimo: 7, valore massimo: 10000, valore predefinito: 72.
+
+FORTRAN_COMMENT_AFTER  = 72
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative alla navigazione del codice sorgente
+#---------------------------------------------------------------------------
+
+# Se il tag SOURCE_BROWSER è impostato a YES allora verrà generato un elenco di
+# file sorgente. Le entità documentate verranno incrociate con questi sorgenti.
+#
+# Nota: Per eliminare tutto il codice sorgente dall'output generato, assicurati
+# che anche VERBATIM_HEADERS sia impostato a NO.
+# Il valore predefinito è: NO.
+
+SOURCE_BROWSER         = NO
+
+# Impostare il tag INLINE_SOURCES a YES includerà il corpo delle funzioni, macro
+# multi-riga, enum o variabili inizializzate con lista direttamente nella
+# documentazione.
+# Il valore predefinito è: NO.
+
+INLINE_SOURCES         = NO
+
+# Impostare il tag STRIP_CODE_COMMENTS a YES istruirà Doxygen a nascondere
+# qualsiasi blocco di commento speciale dai frammenti di codice sorgente generati.
+# I normali commenti C, C++ e Fortran rimarranno sempre visibili.
+# Il valore predefinito è: YES.
+
+STRIP_CODE_COMMENTS    = YES
+
+# Se il tag REFERENCED_BY_RELATION è impostato a YES allora per ogni entità
+# documentata verranno elencate tutte le funzioni documentate che la
+# referenziano.
+# Il valore predefinito è: NO.
+
+REFERENCED_BY_RELATION = NO
+
+# Se il tag REFERENCES_RELATION è impostato a YES allora per ogni funzione
+# documentata verranno elencate tutte le entità documentate chiamate/usate da
+# quella funzione.
+# Il valore predefinito è: NO.
+
+REFERENCES_RELATION    = NO
+
+# Se il tag REFERENCES_LINK_SOURCE è impostato a YES e il tag SOURCE_BROWSER è
+# impostato a YES allora i collegamenti ipertestuali dalle funzioni negli elenchi
+# REFERENCES_RELATION e REFERENCED_BY_RELATION collegheranno al codice sorgente.
+# Altrimenti collegheranno alla documentazione.
+# Il valore predefinito è: YES.
+
+REFERENCES_LINK_SOURCE = YES
+
+# Se SOURCE_TOOLTIPS è abilitato (il valore predefinito) allora passando sopra un
+# collegamento ipertestuale nel codice sorgente verrà mostrato un tooltip con
+# informazioni aggiuntive come prototipo, descrizione breve e collegamenti alla
+# definizione e alla documentazione. Poiché questo renderà il file HTML più
+# grande e il caricamento di file grandi un po' più lento, puoi optare per
+# disabilitare questa funzionalità.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag SOURCE_BROWSER sia impostato a YES.
+
+SOURCE_TOOLTIPS        = YES
+
+# Se il tag USE_HTAGS è impostato a YES allora i riferimenti al codice sorgente
+# punteranno all'HTML generato dallo strumento htags(1) invece che al browser
+# sorgente integrato di Doxygen. Lo strumento htags fa parte del sistema di
+# tagging sorgente global di GNU (vedi
+# https://www.gnu.org/software/global/global.html). Avrai bisogno della versione
+# 4.8.6 o superiore.
+#
+# Per usarlo fai quanto segue:
+# - Installa l'ultima versione di global
+# - Abilita SOURCE_BROWSER e USE_HTAGS nel file di configurazione
+# - Assicurati che INPUT punti alla radice dell'albero dei sorgenti
+# - Esegui doxygen come normale
+#
+# Doxygen invocherà htags (e questo a sua volta invocherà gtags), quindi questi
+# strumenti devono essere disponibili dalla riga di comando (cioè nel percorso di
+# ricerca).
+#
+# Il risultato: invece del browser sorgente generato da Doxygen, i collegamenti
+# al codice sorgente punteranno ora all'output di htags.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag SOURCE_BROWSER sia impostato a YES.
+
+USE_HTAGS              = NO
+
+# Se il tag VERBATIM_HEADERS è impostato a YES allora Doxygen genererà una copia
+# verbatim del file di intestazione per ogni classe per cui è specificata
+# un'inclusione. Imposta a NO per disabilitare questo comportamento.
+# Vedi anche: Sezione \class.
+# Il valore predefinito è: YES.
+
+VERBATIM_HEADERS       = YES
+
+# Se il tag CLANG_ASSISTED_PARSING è impostato a YES allora Doxygen userà il
+# parser clang (vedi: http://clang.llvm.org/) per un'analisi più accurata al
+# costo di prestazioni ridotte. Questo può essere particolarmente utile con codice
+# C++ ricco di template per il quale il parser integrato di Doxygen manca delle
+# necessarie informazioni sui tipi.
+# Nota: La disponibilità di questa opzione dipende dal fatto che Doxygen sia stato
+# generato o meno con l'opzione -Duse_libclang=ON per CMake.
+# Il valore predefinito è: NO.
+
+CLANG_ASSISTED_PARSING = NO
+
+# Se il tag CLANG_ASSISTED_PARSING è impostato a YES e il tag CLANG_ADD_INC_PATHS
+# è impostato a YES allora Doxygen aggiungerà la directory di ogni input al
+# percorso di inclusione.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag CLANG_ASSISTED_PARSING sia impostato a YES.
+
+CLANG_ADD_INC_PATHS    = YES
+
+# Se l'analisi assistita da clang è abilitata puoi fornire al compilatore opzioni
+# da riga di comando che normalmente useresti quando invochi il compilatore. Nota
+# che i percorsi di inclusione saranno già impostati da Doxygen per i file e le
+# directory specificate con INPUT e INCLUDE_PATH.
+# Questo tag richiede che il tag CLANG_ASSISTED_PARSING sia impostato a YES.
+
+CLANG_OPTIONS          =
+
+# Se l'analisi assistita da clang è abilitata puoi fornire al parser clang il
+# percorso della directory contenente un file chiamato compile_commands.json.
+# Questo file è il database di compilazione (vedi:
+# http://clang.llvm.org/docs/HowToSetupToolingForLLVM.html) contenente le opzioni
+# usate quando i file sorgente sono stati compilati. Questo è equivalente a
+# specificare l'opzione -p a uno strumento clang, come clang-check. Queste opzioni
+# verranno quindi passate al parser. Anche qualsiasi opzione specificata con
+# CLANG_OPTIONS verrà aggiunta.
+# Nota: La disponibilità di questa opzione dipende dal fatto che Doxygen sia stato
+# generato o meno con l'opzione -Duse_libclang=ON per CMake.
+
+CLANG_DATABASE_PATH    =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'indice alfabetico delle classi
+#---------------------------------------------------------------------------
+
+# Se il tag ALPHABETICAL_INDEX è impostato a YES, verrà generato un indice
+# alfabetico di tutti i composti. Abilita questo se il progetto contiene molte
+# classi, struct, union o interfacce.
+# Il valore predefinito è: YES.
+
+ALPHABETICAL_INDEX     = YES
+
+# Il tag IGNORE_PREFIX può essere usato per specificare un prefisso (o una lista
+# di prefissi) che deve essere ignorato durante la generazione delle intestazioni
+# dell'indice. Il tag IGNORE_PREFIX funziona per nomi di classi, funzioni e
+# membri. L'entità verrà posizionata nell'elenco alfabetico sotto la prima
+# lettera del nome dell'entità che rimane dopo aver rimosso il prefisso.
+# Questo tag richiede che il tag ALPHABETICAL_INDEX sia impostato a YES.
+
+IGNORE_PREFIX          =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output HTML
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_HTML è impostato a YES, Doxygen genererà output HTML
+# Il valore predefinito è: YES.
+
+GENERATE_HTML          = YES
+
+# Il tag HTML_OUTPUT viene usato per specificare dove verranno messi i documenti
+# HTML. Se viene inserito un percorso relativo il valore di OUTPUT_DIRECTORY verrà
+# messo davanti ad esso.
+# La directory predefinita è: html.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_OUTPUT            = html
+
+# Il tag HTML_FILE_EXTENSION può essere usato per specificare l'estensione del
+# file per ogni pagina HTML generata (ad esempio: .htm, .php, .asp).
+# Il valore predefinito è: .html.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_FILE_EXTENSION    = .html
+
+# Il tag HTML_HEADER può essere usato per specificare un file di intestazione HTML
+# definito dall'utente per ogni pagina HTML generata. Se il tag è lasciato vuoto
+# Doxygen genererà un'intestazione standard.
+#
+# Per ottenere HTML valido il file di intestazione che include qualsiasi script e
+# foglio di stile di cui Doxygen ha bisogno, che dipende dalle opzioni di
+# configurazione usate (ad es. l'impostazione GENERATE_TREEVIEW). È altamente
+# raccomandato iniziare con un'intestazione predefinita usando
+# doxygen -w html new_header.html new_footer.html new_stylesheet.css
+# YourConfigFile
+# e poi modificare il file new_header.html. Vedi anche la sezione "Doxygen usage"
+# per informazioni su come generare l'intestazione predefinita che Doxygen usa
+# normalmente.
+# Nota: L'intestazione è soggetta a cambiamenti quindi tipicamente devi
+# rigenerare l'intestazione predefinita quando aggiorni a una versione più recente
+# di Doxygen. Per una descrizione dei possibili marcatori e nomi di blocco vedi la
+# documentazione.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_HEADER            =
+
+# Il tag HTML_FOOTER può essere usato per specificare un piè di pagina HTML
+# definito dall'utente per ogni pagina HTML generata. Se il tag è lasciato vuoto
+# Doxygen genererà un piè di pagina standard. Vedi HTML_HEADER per maggiori
+# informazioni su come generare un piè di pagina predefinito e quali comandi
+# speciali possono essere usati all'interno del piè di pagina. Vedi anche la
+# sezione "Doxygen usage" per informazioni su come generare il piè di pagina
+# predefinito che Doxygen usa normalmente.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_FOOTER            =
+
+# Il tag HTML_STYLESHEET può essere usato per specificare un foglio di stile
+# CSS definito dall'utente che viene usato da ogni pagina HTML. Può essere usato
+# per rifinire l'aspetto dell'output HTML. Se lasciato vuoto Doxygen genererà un
+# foglio di stile predefinito. Vedi anche la sezione "Doxygen usage" per
+# informazioni su come generare il foglio di stile che Doxygen usa normalmente.
+# Nota: Si raccomanda di usare HTML_EXTRA_STYLESHEET invece di questo tag, poiché
+# è più robusto e questo tag (HTML_STYLESHEET) in futuro diventerà obsoleto.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_STYLESHEET        =
+
+# Il tag HTML_EXTRA_STYLESHEET può essere usato per specificare fogli di stile
+# CSS aggiuntivi definiti dall'utente che vengono inclusi dopo i fogli di stile
+# standard creati da Doxygen. Usando questa opzione si possono sovrascrivere
+# alcuni aspetti di stile. Questo è preferibile rispetto all'uso di
+# HTML_STYLESHEET poiché non sostituisce il foglio di stile standard ed è quindi
+# più robusto contro aggiornamenti futuri. Doxygen copierà i file del foglio di
+# stile nella directory di output.
+# Nota: L'ordine dei file del foglio di stile aggiuntivi è importante (ad es.
+# l'ultimo foglio di stile nella lista sovrascrive l'impostazione dei precedenti
+# nella lista).
+# Nota: Poiché lo stile delle barre di scorrimento attualmente non può essere
+# sovrascritto in Webkit/Chromium, lo stile verrà lasciato fuori dal doxygen.css
+# predefinito se sono stati specificati uno o più fogli di stile aggiuntivi.
+# Quindi se si desidera la personalizzazione delle barre di scorrimento deve
+# essere aggiunta esplicitamente. Per un esempio vedi la documentazione.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_EXTRA_STYLESHEET  =
+
+# Il tag HTML_EXTRA_FILES può essere usato per specificare una o più immagini
+# extra o altri file sorgente che devono essere copiati nella directory di output
+# HTML. Nota che questi file verranno copiati nella directory di output HTML di
+# base. Usa il marcatore $relpath^ nei file HTML_HEADER e/o HTML_FOOTER per
+# caricare questi file. Nel file HTML_STYLESHEET, usa solo il nome del file. Nota
+# anche che i file verranno copiati così come sono; non ci sono comandi o
+# marcatori disponibili.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_EXTRA_FILES       =
+
+# Il tag HTML_COLORSTYLE può essere usato per specificare se l'output HTML
+# generato deve essere renderizzato con un tema scuro o chiaro.
+# Valori possibili sono: LIGHT genera sempre output in modalità chiara, DARK
+# genera sempre output in modalità scura, AUTO_LIGHT imposta automaticamente la
+# modalità secondo la preferenza dell'utente, usa la modalità chiara se non è
+# impostata alcuna preferenza (il valore predefinito), AUTO_DARK imposta
+# automaticamente la modalità secondo la preferenza dell'utente, usa la modalità
+# scura se non è impostata alcuna preferenza e TOGGLE permette all'utente di
+# passare tra modalità chiara e scura tramite un pulsante.
+# Il valore predefinito è: AUTO_LIGHT.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_COLORSTYLE        = AUTO_LIGHT
+
+# Il tag HTML_COLORSTYLE_HUE controlla il colore dell'output HTML. Doxygen
+# regolerà i colori nel foglio di stile e nelle immagini di sfondo secondo questo
+# colore. La tonalità è specificata come angolo su una ruota dei colori, vedi
+# https://en.wikipedia.org/wiki/Hue per maggiori informazioni. Ad esempio il
+# valore 0 rappresenta il rosso, 60 è giallo, 120 è verde, 180 è ciano, 240 è
+# blu, 300 viola, e 360 è di nuovo rosso.
+# Valore minimo: 0, valore massimo: 359, valore predefinito: 220.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_COLORSTYLE_HUE    = 220
+
+# Il tag HTML_COLORSTYLE_SAT controlla la purezza (o saturazione) dei colori
+# nell'output HTML. Per un valore di 0 l'output userà solo scale di grigi. Un
+# valore di 255 produrrà i colori più vividi.
+# Valore minimo: 0, valore massimo: 255, valore predefinito: 100.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_COLORSTYLE_SAT    = 100
+
+# Il tag HTML_COLORSTYLE_GAMMA controlla la correzione gamma applicata alla
+# componente di luminanza dei colori nell'output HTML. Valori sotto 100 rendono
+# gradualmente l'output più chiaro, mentre valori sopra 100 rendono l'output più
+# scuro. Il valore diviso per 100 è il gamma effettivo applicato, quindi 80
+# rappresenta un gamma di 0.8, il valore 220 rappresenta un gamma di 2.2, e 100
+# non cambia il gamma.
+# Valore minimo: 40, valore massimo: 240, valore predefinito: 80.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_COLORSTYLE_GAMMA  = 80
+
+# Se il tag HTML_DYNAMIC_MENUS è impostato a YES allora la documentazione HTML
+# generata conterrà un indice principale con menu di navigazione verticali che
+# vengono creati dinamicamente tramite JavaScript. Se disabilitato, l'indice di
+# navigazione consisterà di più livelli di schede che sono staticamente incorporati
+# in ogni pagina HTML. Disabilita questa opzione per supportare browser che non
+# hanno JavaScript, come il browser della guida Qt.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_DYNAMIC_MENUS     = YES
+
+# Se il tag HTML_DYNAMIC_SECTIONS è impostato a YES allora la documentazione HTML
+# generata conterrà sezioni che possono essere nascoste e mostrate dopo che la
+# pagina è stata caricata.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_DYNAMIC_SECTIONS  = NO
+
+# Se il tag HTML_CODE_FOLDING è impostato a YES allora classi e funzioni possono
+# essere dinamicamente piegate ed espanse nel codice sorgente HTML generato.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_CODE_FOLDING      = YES
+
+# Se il tag HTML_COPY_CLIPBOARD è impostato a YES allora Doxygen mostrerà
+# un'icona nell'angolo in alto a destra di frammenti di codice e testo che permette
+# all'utente di copiarne il contenuto negli appunti. Nota che questo funziona solo
+# se supportato dal browser e la pagina web viene servita tramite un contesto
+# sicuro (vedi: https://www.w3.org/TR/secure-contexts/), cioè usando il protocollo
+# https: o file:.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_COPY_CLIPBOARD    = YES
+
+# Doxygen memorizza un paio di impostazioni in modo persistente nel browser (ad
+# es. tramite cookie). Per impostazione predefinita queste impostazioni si
+# applicano a tutte le pagine HTML generate da Doxygen in tutti i progetti. Il tag
+# HTML_PROJECT_COOKIE può essere usato per memorizzare le impostazioni sotto una
+# chiave specifica del progetto, in modo che le preferenze dell'utente vengano
+# memorizzate separatamente.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_PROJECT_COOKIE    =
+
+# Con HTML_INDEX_NUM_ENTRIES si può controllare il numero preferito di voci
+# mostrate inizialmente nei vari indici strutturati ad albero; l'utente può
+# espandere e comprimere le voci dinamicamente in seguito. Doxygen espanderà
+# l'albero a un livello tale che al massimo il numero specificato di voci sia
+# visibile (a meno che un albero completamente compresso non superi già questa
+# quantità). Quindi impostando il numero di voci a 1 si produrrà un albero
+# completamente compresso per impostazione predefinita. 0 è un valore speciale
+# che rappresenta un numero infinito di voci e risulterà in un albero
+# completamente espanso per impostazione predefinita.
+# Valore minimo: 0, valore massimo: 9999, valore predefinito: 100.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_INDEX_NUM_ENTRIES = 100
+
+# Se il tag GENERATE_DOCSET è impostato a YES, verranno generati file di indice
+# aggiuntivi che possono essere usati come input per l'ambiente di sviluppo
+# integrato Xcode 3 di Apple (vedi:
+# https://developer.apple.com/xcode/), introdotto con OSX 10.5 (Leopard). Per
+# creare un set di documentazione, Doxygen genererà un Makefile nella directory di
+# output HTML. Eseguire make produrrà il docset in quella directory ed eseguire
+# make install installerà il docset in
+# ~/Library/Developer/Shared/Documentation/DocSets in modo che Xcode lo trovi
+# all'avvio. Vedi
+# https://developer.apple.com/library/archive/featuredarticles/Doxy
+# genXcode/_index.html per maggiori informazioni.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+GENERATE_DOCSET        = NO
+
+# Questo tag determina il nome del feed del docset. Un feed di documentazione
+# fornisce un ombrello sotto il quale possono essere raggruppati più set di
+# documentazione da un singolo fornitore (come un'azienda o una suite di
+# prodotti).
+# Il valore predefinito è: Doxygen generated docs.
+# Questo tag richiede che il tag GENERATE_DOCSET sia impostato a YES.
+
+DOCSET_FEEDNAME        = "Doxygen generated docs"
+
+# Questo tag determina l'URL del feed del docset. Un feed di documentazione
+# fornisce un ombrello sotto il quale possono essere raggruppati più set di
+# documentazione da un singolo fornitore (come un'azienda o una suite di
+# prodotti).
+# Questo tag richiede che il tag GENERATE_DOCSET sia impostato a YES.
+
+DOCSET_FEEDURL         =
+
+# Questo tag specifica una stringa che dovrebbe identificare univocamente il
+# bundle del set di documentazione. Questa dovrebbe essere una stringa in stile
+# nome di dominio inverso, ad es. com.mycompany.MyDocSet. Doxygen aggiungerà
+# .docset al nome.
+# Il valore predefinito è: org.doxygen.Project.
+# Questo tag richiede che il tag GENERATE_DOCSET sia impostato a YES.
+
+DOCSET_BUNDLE_ID       = org.doxygen.Project
+
+# Il tag DOCSET_PUBLISHER_ID specifica una stringa che dovrebbe identificare
+# univocamente l'editore della documentazione. Questa dovrebbe essere una stringa
+# in stile nome di dominio inverso, ad es.
+# com.mycompany.MyDocSet.documentation.
+# Il valore predefinito è: org.doxygen.Publisher.
+# Questo tag richiede che il tag GENERATE_DOCSET sia impostato a YES.
+
+DOCSET_PUBLISHER_ID    = org.doxygen.Publisher
+
+# Il tag DOCSET_PUBLISHER_NAME identifica l'editore della documentazione.
+# Il valore predefinito è: Publisher.
+# Questo tag richiede che il tag GENERATE_DOCSET sia impostato a YES.
+
+DOCSET_PUBLISHER_NAME  = Publisher
+
+# Se il tag GENERATE_HTMLHELP è impostato a YES allora Doxygen genera tre file di
+# indice HTML aggiuntivi: index.hhp, index.hhc e index.hhk. Il file index.hhp è
+# un file di progetto che può essere letto da Microsoft HTML Help Workshop su
+# Windows. All'inizio del 2021 Microsoft ha reso offline la pagina originale, con
+# tra l'altro i link per il download (l'HTML help workshop era già da molti anni
+# in modalità manutenzione). Puoi scaricare l'HTML help workshop dagli archivi web
+# all'eseguibile di installazione (vedi:
+# http://web.archive.org/web/20160201063255/https://download.microsoft.com/downl
+# oad/0/A/9/0A939EF6-E31C-430F-A3DF-DFAE7960D564/htmlhelp.exe).
+#
+# L'HTML Help Workshop contiene un compilatore che può convertire tutto l'output
+# HTML generato da Doxygen in un singolo file HTML compilato (.chm). I file HTML
+# compilati sono ora usati come formato di aiuto di Windows 98, e sostituiranno il
+# vecchio formato di aiuto di Windows (.hlp) su tutte le piattaforme Windows in
+# futuro. I file HTML compressi contengono anche un indice, un indice analitico, e
+# puoi cercare parole nella documentazione. L'HTML workshop contiene anche un
+# visualizzatore per file HTML compressi.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+GENERATE_HTMLHELP      = NO
+
+# Il tag CHM_FILE può essere usato per specificare il nome del file del file .chm
+# risultante. Puoi aggiungere un percorso davanti al file se il risultato non
+# dovesse essere scritto nella directory di output HTML.
+# Questo tag richiede che il tag GENERATE_HTMLHELP sia impostato a YES.
+
+CHM_FILE               =
+
+# Il tag HHC_LOCATION può essere usato per specificare la posizione (percorso
+# assoluto incluso il nome del file) del compilatore HTML help (hhc.exe). Se non
+# vuoto, Doxygen cercherà di eseguire il compilatore HTML help sul file index.hhp
+# generato. Il file deve essere specificato con percorso completo.
+# Questo tag richiede che il tag GENERATE_HTMLHELP sia impostato a YES.
+
+HHC_LOCATION           =
+
+# Il flag GENERATE_CHI controlla se viene generato un file di indice .chi
+# separato (YES) o se deve essere incluso nel file .chm principale (NO).
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTMLHELP sia impostato a YES.
+
+GENERATE_CHI           = NO
+
+# Il tag CHM_INDEX_ENCODING viene usato per codificare l'indice HtmlHelp (hhk), il
+# contenuto (hhc) e il contenuto del file di progetto.
+# Questo tag richiede che il tag GENERATE_HTMLHELP sia impostato a YES.
+
+CHM_INDEX_ENCODING     =
+
+# Il flag BINARY_TOC controlla se viene generato un indice binario (YES) o un
+# indice normale (NO) nel file .chm. Inoltre abilita i pulsanti Previous e Next.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTMLHELP sia impostato a YES.
+
+BINARY_TOC             = NO
+
+# Il flag TOC_EXPAND può essere impostato a YES per aggiungere voci extra per i
+# membri del gruppo all'indice della documentazione HTML help e alla vista ad
+# albero.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTMLHELP sia impostato a YES.
+
+TOC_EXPAND             = NO
+
+# Il tag SITEMAP_URL viene usato per specificare l'URL completo del luogo in cui
+# la documentazione generata verrà posizionata sul server dall'utente durante la
+# distribuzione della documentazione. La sitemap generata è chiamata sitemap.xml e
+# posizionata nella directory specificata da HTML_OUTPUT. Nel caso in cui non sia
+# specificato alcun SITEMAP_URL non viene generata alcuna sitemap. Per informazioni
+# sul protocollo sitemap vedi https://www.sitemaps.org
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+SITEMAP_URL            =
+
+# Se il tag GENERATE_QHP è impostato a YES e sia QHP_NAMESPACE che
+# QHP_VIRTUAL_FOLDER sono impostati, verrà generato un file di indice aggiuntivo
+# che può essere usato come input per qhelpgenerator di Qt per generare una Guida
+# Compressa Qt (.qch) della documentazione HTML generata.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+GENERATE_QHP           = NO
+
+# Se il tag QHG_LOCATION è specificato, il tag QCH_FILE può essere usato per
+# specificare il nome del file del file .qch risultante. Il percorso specificato è
+# relativo alla cartella di output HTML.
+# Questo tag richiede che il tag GENERATE_QHP sia impostato a YES.
+
+QCH_FILE               =
+
+# Il tag QHP_NAMESPACE specifica il namespace da usare quando si genera l'output
+# del Progetto di Guida Qt. Per maggiori informazioni vedi Qt Help Project /
+# Namespace (vedi:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#namespace).
+# Il valore predefinito è: org.doxygen.Project.
+# Questo tag richiede che il tag GENERATE_QHP sia impostato a YES.
+
+QHP_NAMESPACE          = org.doxygen.Project
+
+# Il tag QHP_VIRTUAL_FOLDER specifica il namespace da usare quando si genera
+# l'output del Progetto di Guida Qt. Per maggiori informazioni vedi Qt Help
+# Project / Virtual Folders (vedi:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#virtual-folders).
+# Il valore predefinito è: doc.
+# Questo tag richiede che il tag GENERATE_QHP sia impostato a YES.
+
+QHP_VIRTUAL_FOLDER     = doc
+
+# Se il tag QHP_CUST_FILTER_NAME è impostato, specifica il nome di un filtro
+# personalizzato da aggiungere. Per maggiori informazioni vedi Qt Help Project /
+# Custom Filters (vedi:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#custom-filters).
+# Questo tag richiede che il tag GENERATE_QHP sia impostato a YES.
+
+QHP_CUST_FILTER_NAME   =
+
+# Il tag QHP_CUST_FILTER_ATTRS specifica la lista degli attributi del filtro
+# personalizzato da aggiungere. Per maggiori informazioni vedi Qt Help Project /
+# Custom Filters (vedi:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#custom-filters).
+# Questo tag richiede che il tag GENERATE_QHP sia impostato a YES.
+
+QHP_CUST_FILTER_ATTRS  =
+
+# Il tag QHP_SECT_FILTER_ATTRS specifica la lista degli attributi a cui
+# corrisponde la sezione filtro di questo progetto. Qt Help Project / Filter
+# Attributes (vedi:
+# https://doc.qt.io/archives/qt-4.8/qthelpproject.html#filter-attributes).
+# Questo tag richiede che il tag GENERATE_QHP sia impostato a YES.
+
+QHP_SECT_FILTER_ATTRS  =
+
+# Il tag QHG_LOCATION può essere usato per specificare la posizione (percorso
+# assoluto incluso il nome del file) di qhelpgenerator di Qt. Se non vuoto Doxygen
+# cercherà di eseguire qhelpgenerator sul file .qhp generato.
+# Questo tag richiede che il tag GENERATE_QHP sia impostato a YES.
+
+QHG_LOCATION           =
+
+# Se il tag GENERATE_ECLIPSEHELP è impostato a YES, verranno generati file di
+# indice aggiuntivi, insieme ai file HTML, che formano un plugin di aiuto Eclipse.
+# Per installare questo plugin e renderlo disponibile sotto il menu dei contenuti
+# di aiuto in Eclipse, il contenuto della directory contenente i file HTML e XML
+# deve essere copiato nella directory dei plugin di eclipse. Il nome della
+# directory all'interno della directory dei plugin dovrebbe essere lo stesso del
+# valore di ECLIPSE_DOC_ID. Dopo la copia Eclipse deve essere riavviato prima che
+# l'aiuto appaia.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+GENERATE_ECLIPSEHELP   = NO
+
+# Un identificatore univoco per il plugin di aiuto Eclipse. Quando si installa il
+# plugin anche il nome della directory contenente i file HTML e XML dovrebbe avere
+# questo nome. Ogni set di documentazione dovrebbe avere il proprio
+# identificatore.
+# Il valore predefinito è: org.doxygen.Project.
+# Questo tag richiede che il tag GENERATE_ECLIPSEHELP sia impostato a YES.
+
+ECLIPSE_DOC_ID         = org.doxygen.Project
+
+# Se vuoi il pieno controllo sul layout delle pagine HTML generate potrebbe essere
+# necessario disabilitare l'indice e sostituirlo con il tuo. Il tag DISABLE_INDEX
+# può essere usato per attivare/disattivare l'indice condensato (schede) in cima a
+# ogni pagina HTML. Un valore di NO abilita l'indice e il valore YES lo
+# disabilita. Poiché le schede nell'indice contengono le stesse informazioni
+# dell'albero di navigazione, puoi impostare questa opzione a YES se imposti anche
+# GENERATE_TREEVIEW a YES.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+DISABLE_INDEX          = NO
+
+# Il tag GENERATE_TREEVIEW viene usato per specificare se deve essere generata una
+# struttura di indice ad albero per visualizzare informazioni gerarchiche. Se il
+# valore del tag è impostato a YES, verrà generato un pannello laterale contenente
+# una struttura di indice ad albero (proprio come quella che viene generata per
+# HTML Help). Per questo è richiesto un browser che supporti JavaScript, DHTML,
+# CSS e frame (cioè qualsiasi browser moderno). Gli utenti Windows stanno
+# probabilmente meglio usando la funzionalità HTML help. Tramite fogli di stile
+# personalizzati (vedi HTML_EXTRA_STYLESHEET) si può ulteriormente rifinire
+# l'aspetto dell'indice (vedi "Fine-tuning the output"). Come esempio, il foglio
+# di stile predefinito generato da Doxygen ha un esempio che mostra come mettere
+# un'immagine alla radice dell'albero invece di PROJECT_NAME. Poiché l'albero ha
+# fondamentalmente più informazioni dettagliate dell'indice a schede, potresti
+# considerare di impostare DISABLE_INDEX a YES quando abiliti questa opzione.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+GENERATE_TREEVIEW      = YES
+
+# Quando GENERATE_TREEVIEW è impostato a YES, l'opzione PAGE_OUTLINE_PANEL
+# determina se viene mostrato un pannello di navigazione aggiuntivo sul lato
+# destro dello schermo, che visualizza una struttura del contenuto della pagina
+# principale, simile ad esempio a https://developer.android.com/reference Se
+# GENERATE_TREEVIEW è impostato a NO, questa opzione non ha effetto.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+PAGE_OUTLINE_PANEL     = YES
+
+# Quando GENERATE_TREEVIEW è impostato a YES, l'opzione FULL_SIDEBAR determina se
+# la barra laterale è limitata solo all'area della treeview (valore NO) o se deve
+# estendersi all'altezza completa della finestra (valore YES). Impostando questo a
+# YES si ottiene un layout simile ad esempio a https://docs.readthedocs.io con più
+# spazio per i contenuti, ma meno spazio per il logo, il titolo e la descrizione
+# del progetto. Se GENERATE_TREEVIEW è impostato a NO, questa opzione non ha
+# effetto.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+FULL_SIDEBAR           = NO
+
+# Il tag ENUM_VALUES_PER_LINE può essere usato per impostare il numero di valori
+# enum che Doxygen raggrupperà su una riga nella documentazione HTML generata.
+#
+# Nota che un valore di 0 sopprimerà completamente i valori enum dall'apparire
+# nella sezione di panoramica.
+# Valore minimo: 0, valore massimo: 20, valore predefinito: 4.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+ENUM_VALUES_PER_LINE   = 4
+
+# Quando il tag SHOW_ENUM_VALUES è impostato, doxygen mostrerà i valori di
+# enumerazione specificati oltre ai mnemonici di enumerazione.
+# Il valore predefinito è: NO.
+
+SHOW_ENUM_VALUES       = NO
+
+# Se la treeview è abilitata (vedi GENERATE_TREEVIEW) allora questo tag può essere
+# usato per impostare la larghezza iniziale (in pixel) del frame in cui viene
+# mostrato l'albero.
+# Valore minimo: 0, valore massimo: 1500, valore predefinito: 250.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+TREEVIEW_WIDTH         = 250
+
+# Se l'opzione EXT_LINKS_IN_WINDOW è impostata a YES, Doxygen aprirà i
+# collegamenti a simboli esterni importati tramite file tag in una finestra
+# separata.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+EXT_LINKS_IN_WINDOW    = NO
+
+# Se il tag OBFUSCATE_EMAILS è impostato a YES, Doxygen offuscherà gli indirizzi
+# email.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+OBFUSCATE_EMAILS       = YES
+
+# Se l'opzione HTML_FORMULA_FORMAT è impostata a svg, Doxygen userà lo strumento
+# pdf2svg (vedi https://github.com/dawbarton/pdf2svg) o inkscape (vedi
+# https://inkscape.org) per generare formule come immagini SVG invece che PNG per
+# l'output HTML. Queste immagini generalmente appariranno più belle a risoluzioni
+# scalate.
+# Valori possibili sono: png (il valore predefinito) e svg (appare più bello ma
+# richiede lo strumento pdf2svg o inkscape).
+# Il valore predefinito è: png.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+HTML_FORMULA_FORMAT    = png
+
+# Usa questo tag per cambiare la dimensione del carattere delle formule LaTeX
+# incluse come immagini nella documentazione HTML. Quando cambi la dimensione del
+# carattere dopo un'esecuzione riuscita di Doxygen devi rimuovere manualmente
+# qualsiasi immagine form_*.png dalla directory di output HTML per forzarne la
+# rigenerazione.
+# Valore minimo: 8, valore massimo: 50, valore predefinito: 10.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+FORMULA_FONTSIZE       = 10
+
+# Il file FORMULA_MACROFILE può contenere comandi LaTeX \newcommand e
+# \renewcommand per creare nuovi comandi LaTeX da usare nelle formule come
+# blocchi di costruzione. Vedi la sezione "Including formulas" per i dettagli.
+
+FORMULA_MACROFILE      =
+
+# Abilita l'opzione USE_MATHJAX per renderizzare le formule LaTeX usando MathJax
+# (vedi https://www.mathjax.org) che usa JavaScript lato client per il rendering
+# invece di usare bitmap pre-renderizzate. Usa questo se non hai LaTeX installato
+# o se vuoi che le formule appaiano più belle nell'output HTML. Quando abilitato
+# potresti anche aver bisogno di installare MathJax separatamente e configurare il
+# percorso ad esso usando l'opzione MATHJAX_RELPATH.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+USE_MATHJAX            = NO
+
+# Con MATHJAX_VERSION è possibile specificare la versione di MathJax da usare.
+# Nota che le diverse versioni di MathJax hanno requisiti diversi per quanto
+# riguarda le diverse impostazioni, quindi è possibile che anche altre
+# impostazioni di MathJax debbano essere cambiate quando si passa tra le diverse
+# versioni di MathJax.
+# Valori possibili sono: MathJax_2, MathJax_3 e MathJax_4.
+# Il valore predefinito è: MathJax_2.
+# Questo tag richiede che il tag USE_MATHJAX sia impostato a YES.
+
+MATHJAX_VERSION        = MathJax_2
+
+# Quando MathJax è abilitato puoi impostare il formato di output predefinito da
+# usare per l'output di MathJax. Per maggiori dettagli sul formato di output vedi
+# MathJax versione 2 (vedi:
+# https://docs.mathjax.org/en/v2.7/output.html), MathJax versione 3 (vedi:
+# https://docs.mathjax.org/en/v3.2/output/index.html) e MathJax versione 4 (vedi:
+# https://docs.mathjax.org/en/v4.0/output/index.htm).
+# Valori possibili sono: HTML-CSS (che è più lento, ma ha la migliore
+# compatibilità. Questo è il nome per Mathjax versione 2, per MathJax versione 3
+# questo verrà tradotto in chtml), NativeMML (cioè MathML. Supportato solo per
+# MathJax 2. Per MathJax versione 3 verrà invece usato chtml.), chtml (Questo è
+# il nome per Mathjax versione 3, per MathJax versione 2 questo verrà tradotto in
+# HTML-CSS) e SVG.
+# Il valore predefinito è: HTML-CSS.
+# Questo tag richiede che il tag USE_MATHJAX sia impostato a YES.
+
+MATHJAX_FORMAT         = HTML-CSS
+
+# Quando MathJax è abilitato devi specificare la posizione relativa alla directory
+# di output HTML usando l'opzione MATHJAX_RELPATH. Per Mathjax versione 2 la
+# directory di destinazione dovrebbe contenere lo script MathJax.js. Ad esempio, se
+# la directory mathjax si trova allo stesso livello della directory di output HTML,
+# allora MATHJAX_RELPATH dovrebbe essere ../mathjax. Per Mathjax versioni 3 e 4 la
+# directory di destinazione dovrebbe contenere lo script tex-<format>.js (dove
+# <format> è chtml o svg). Il valore predefinito punta alla Content Delivery
+# Network di MathJax così puoi vedere rapidamente il risultato senza installare
+# MathJax. Tuttavia, è fortemente raccomandato installare una copia locale di
+# MathJax da https://www.mathjax.org prima della distribuzione. Il valore
+# predefinito è:
+# - nel caso di MathJax versione 2: https://cdn.jsdelivr.net/npm/mathjax@2
+# - nel caso di MathJax versione 3: https://cdn.jsdelivr.net/npm/mathjax@3
+# - nel caso di MathJax versione 4: https://cdn.jsdelivr.net/npm/mathjax@4
+# Questo tag richiede che il tag USE_MATHJAX sia impostato a YES.
+
+MATHJAX_RELPATH        =
+
+# Il tag MATHJAX_EXTENSIONS può essere usato per specificare uno o più nomi di
+# estensione MathJax che dovrebbero essere abilitati durante il rendering di
+# MathJax. Ad esempio per MathJax versione 2 (vedi
+# https://docs.mathjax.org/en/v2.7/tex.html):
+# MATHJAX_EXTENSIONS = TeX/AMSmath TeX/AMSsymbols
+# Ad esempio per MathJax versione 3 (vedi
+# https://docs.mathjax.org/en/v3.2/input/tex/extensions/):
+# MATHJAX_EXTENSIONS = ams
+# Ad esempio per MathJax versione 4 (vedi
+# https://docs.mathjax.org/en/v4.0/input/tex/extensions/):
+# MATHJAX_EXTENSIONS = units
+# Nota che per Mathjax versione 4 parecchie estensioni sono già automaticamente
+# caricate. Per disabilitare un pacchetto in Mathjax versione 4 si può usare il
+# nome del pacchetto preceduto da un segno meno (- come MATHJAX_EXTENSIONS +=
+# -textmacros)
+# Questo tag richiede che il tag USE_MATHJAX sia impostato a YES.
+
+MATHJAX_EXTENSIONS     =
+
+# Il tag MATHJAX_CODEFILE può essere usato per specificare un file con pezzi di
+# codice JavaScript che verranno usati all'avvio del codice MathJax. Vedi il sito
+# di Mathjax per maggiori dettagli:
+# - MathJax versione 2 (vedi: https://docs.mathjax.org/en/v2.7/)
+# - MathJax versione 3 (vedi: https://docs.mathjax.org/en/v3.2/)
+# - MathJax versione 4 (vedi: https://docs.mathjax.org/en/v4.0/) Per un esempio
+# vedi la documentazione.
+# Questo tag richiede che il tag USE_MATHJAX sia impostato a YES.
+
+MATHJAX_CODEFILE       =
+
+# Quando il tag SEARCHENGINE è abilitato Doxygen genererà una casella di ricerca
+# per l'output HTML. Il motore di ricerca sottostante usa JavaScript e DHTML e
+# dovrebbe funzionare su qualsiasi browser moderno. Nota che quando si usa HTML
+# help (GENERATE_HTMLHELP), Qt help (GENERATE_QHP), o docsets (GENERATE_DOCSET)
+# c'è già una funzione di ricerca quindi questa dovrebbe tipicamente essere
+# disabilitata. Per progetti grandi il motore di ricerca basato su JavaScript può
+# essere lento, quindi abilitare SERVER_BASED_SEARCH può fornire una soluzione
+# migliore. È possibile cercare usando la tastiera; per saltare alla casella di
+# ricerca usa <access key> + S (quale sia la <access key> dipende dal sistema
+# operativo e dal browser, ma è tipicamente <CTRL>, <ALT>/<option>, o entrambi).
+# All'interno della casella di ricerca usa il <cursor down key> per saltare nella
+# finestra dei risultati di ricerca, i risultati possono essere navigati usando i
+# <cursor keys>. Premi <Enter> per selezionare un elemento o <escape> per
+# annullare la ricerca. Le opzioni di filtro possono essere selezionate quando il
+# cursore è all'interno della casella di ricerca premendo <Shift>+<cursor down>.
+# Anche qui usa i <cursor keys> per selezionare un filtro e <Enter> o <escape> per
+# attivare o annullare l'opzione di filtro.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_HTML sia impostato a YES.
+
+SEARCHENGINE           = YES
+
+# Quando il tag SERVER_BASED_SEARCH è abilitato il motore di ricerca verrà
+# implementato usando un server web invece di un client web usando JavaScript. Ci
+# sono due varianti di ricerca basata su server web a seconda dell'impostazione
+# EXTERNAL_SEARCH. Quando disabilitato, Doxygen genererà uno script PHP per la
+# ricerca e un file di indice usato dallo script. Quando EXTERNAL_SEARCH è
+# abilitato l'indicizzazione e la ricerca devono essere fornite da strumenti
+# esterni. Vedi la sezione "External Indexing and Searching" per i dettagli.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag SEARCHENGINE sia impostato a YES.
+
+SERVER_BASED_SEARCH    = NO
+
+# Quando il tag EXTERNAL_SEARCH è abilitato Doxygen non genererà più lo script PHP
+# per la ricerca. Invece i risultati di ricerca vengono scritti in un file XML che
+# deve essere elaborato da un indicizzatore esterno. Doxygen invocherà un motore
+# di ricerca esterno puntato dall'opzione SEARCHENGINE_URL per ottenere i
+# risultati di ricerca.
+#
+# Doxygen viene fornito con un indicizzatore di esempio (doxyindexer) e un motore
+# di ricerca (doxysearch.cgi) che sono basati sulla libreria del motore di ricerca
+# open source Xapian (vedi: https://xapian.org/).
+#
+# Vedi la sezione "External Indexing and Searching" per i dettagli.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag SEARCHENGINE sia impostato a YES.
+
+EXTERNAL_SEARCH        = NO
+
+# SEARCHENGINE_URL dovrebbe puntare a un motore di ricerca ospitato da un server
+# web che restituirà i risultati di ricerca quando EXTERNAL_SEARCH è abilitato.
+#
+# Doxygen viene fornito con un indicizzatore di esempio (doxyindexer) e un motore
+# di ricerca (doxysearch.cgi) che sono basati sulla libreria del motore di ricerca
+# open source Xapian (vedi: https://xapian.org/). Vedi la sezione "External
+# Indexing and Searching" per i dettagli.
+# Questo tag richiede che il tag SEARCHENGINE sia impostato a YES.
+
+SEARCHENGINE_URL       =
+
+# Quando sia SERVER_BASED_SEARCH che EXTERNAL_SEARCH sono abilitati i dati di
+# ricerca non indicizzati vengono scritti in un file per l'indicizzazione da parte
+# di uno strumento esterno. Con il tag SEARCHDATA_FILE può essere specificato il
+# nome di questo file.
+# Il file predefinito è: searchdata.xml.
+# Questo tag richiede che il tag SEARCHENGINE sia impostato a YES.
+
+SEARCHDATA_FILE        = searchdata.xml
+
+# Quando sia SERVER_BASED_SEARCH che EXTERNAL_SEARCH sono abilitati il tag
+# EXTERNAL_SEARCH_ID può essere usato come identificatore per il progetto. Questo
+# è utile in combinazione con EXTRA_SEARCH_MAPPINGS per cercare attraverso più
+# progetti e reindirizzare i risultati al progetto giusto.
+# Questo tag richiede che il tag SEARCHENGINE sia impostato a YES.
+
+EXTERNAL_SEARCH_ID     =
+
+# Il tag EXTRA_SEARCH_MAPPINGS può essere usato per abilitare la ricerca
+# attraverso progetti Doxygen diversi da quello definito da questo file di
+# configurazione, ma che sono tutti aggiunti allo stesso indice di ricerca
+# esterno. Ogni progetto deve avere un id univoco impostato tramite
+# EXTERNAL_SEARCH_ID. La mappatura di ricerca mappa quindi l'id a una posizione
+# relativa dove può essere trovata la documentazione. Il formato è:
+# EXTRA_SEARCH_MAPPINGS = tagname1=loc1 tagname2=loc2 ...
+# Questo tag richiede che il tag SEARCHENGINE sia impostato a YES.
+
+EXTRA_SEARCH_MAPPINGS  =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output LaTeX
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_LATEX è impostato a YES, Doxygen genererà output LaTeX.
+# Il valore predefinito è: YES.
+
+GENERATE_LATEX         = NO
+
+# Il tag LATEX_OUTPUT viene usato per specificare dove verranno messi i documenti
+# LaTeX. Se viene inserito un percorso relativo il valore di OUTPUT_DIRECTORY
+# verrà messo davanti ad esso.
+# La directory predefinita è: latex.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_OUTPUT           = latex
+
+# Il tag LATEX_CMD_NAME può essere usato per specificare il nome del comando LaTeX
+# da invocare.
+#
+# Nota che quando non si abilita USE_PDFLATEX il valore predefinito è latex quando
+# si abilita USE_PDFLATEX il valore predefinito è pdflatex e quando in
+# quest'ultimo caso viene scelto latex questo viene sovrascritto da pdflatex. Per
+# lingue di output specifiche il valore predefinito può essere stato impostato
+# diversamente, questo dipende dall'implementazione della lingua di output.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_CMD_NAME         =
+
+# Il tag MAKEINDEX_CMD_NAME può essere usato per specificare il nome del comando
+# per generare l'indice per LaTeX.
+# Nota: Questo tag è usato nel Makefile / make.bat.
+# Vedi anche: LATEX_MAKEINDEX_CMD per la parte nel file di output generato
+# (.tex).
+# Il file predefinito è: makeindex.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+MAKEINDEX_CMD_NAME     = makeindex
+
+# Il tag LATEX_MAKEINDEX_CMD può essere usato per specificare il nome del comando
+# per generare l'indice per LaTeX. Nel caso in cui non ci sia una barra rovesciata
+# (\) come primo carattere verrà automaticamente aggiunta nel codice LaTeX.
+# Nota: Questo tag è usato nel file di output generato (.tex).
+# Vedi anche: MAKEINDEX_CMD_NAME per la parte nel Makefile / make.bat.
+# Il valore predefinito è: makeindex.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_MAKEINDEX_CMD    = makeindex
+
+# Se il tag COMPACT_LATEX è impostato a YES, Doxygen genera documenti LaTeX più
+# compatti. Questo può essere utile per piccoli progetti e può aiutare a
+# risparmiare qualche albero in generale.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+COMPACT_LATEX          = NO
+
+# Il tag PAPER_TYPE può essere usato per impostare il tipo di carta usato dalla
+# stampante.
+# Valori possibili sono: a4 (210 x 297 mm), letter (8.5 x 11 pollici), legal (8.5
+# x 14 pollici) e executive (7.25 x 10.5 pollici).
+# Il valore predefinito è: a4.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+PAPER_TYPE             = a4
+
+# Il tag EXTRA_PACKAGES può essere usato per specificare uno o più nomi di
+# pacchetto LaTeX che dovrebbero essere inclusi nell'output LaTeX. Il pacchetto
+# può essere specificato solo con il suo nome o con la sintassi corretta da usare
+# con il comando \usepackage di LaTeX. Per ottenere il font times ad esempio puoi
+# specificare :
+# EXTRA_PACKAGES=times or EXTRA_PACKAGES={times}
+# Per usare l'opzione intlimits con il pacchetto amsmath puoi specificare:
+# EXTRA_PACKAGES=[intlimits]{amsmath}
+# Se lasciato vuoto non verranno inclusi pacchetti extra.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+EXTRA_PACKAGES         =
+
+# Il tag LATEX_HEADER può essere usato per specificare un'intestazione LaTeX
+# definita dall'utente per il documento LaTeX generato. L'intestazione dovrebbe
+# contenere tutto fino al primo capitolo. Se è lasciata vuota Doxygen genererà
+# un'intestazione standard. È altamente raccomandato iniziare con un'intestazione
+# predefinita usando
+# doxygen -w latex new_header.tex new_footer.tex new_stylesheet.sty
+# e poi modificare il file new_header.tex. Vedi anche la sezione "Doxygen usage"
+# per informazioni su come generare l'intestazione predefinita che Doxygen usa
+# normalmente.
+#
+# Nota: Usa un'intestazione definita dall'utente solo se sai cosa stai facendo!
+# Nota: L'intestazione è soggetta a cambiamenti quindi tipicamente devi rigenerare
+# l'intestazione predefinita quando aggiorni a una versione più recente di
+# Doxygen. Per una descrizione dei possibili marcatori e nomi di blocco vedi la
+# documentazione.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_HEADER           =
+
+# Il tag LATEX_FOOTER può essere usato per specificare un piè di pagina LaTeX
+# definito dall'utente per il documento LaTeX generato. Il piè di pagina dovrebbe
+# contenere tutto dopo l'ultimo capitolo. Se è lasciato vuoto Doxygen genererà un
+# piè di pagina standard. Vedi LATEX_HEADER per maggiori informazioni su come
+# generare un piè di pagina predefinito e quali comandi speciali possono essere
+# usati all'interno del piè di pagina. Vedi anche la sezione "Doxygen usage" per
+# informazioni su come generare il piè di pagina predefinito che Doxygen usa
+# normalmente. Nota: Usa un piè di pagina definito dall'utente solo se sai cosa
+# stai facendo!
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_FOOTER           =
+
+# Il tag LATEX_EXTRA_STYLESHEET può essere usato per specificare fogli di stile
+# LaTeX aggiuntivi definiti dall'utente che vengono inclusi dopo i fogli di stile
+# standard creati da Doxygen. Usando questa opzione si possono sovrascrivere
+# alcuni aspetti di stile. Doxygen copierà i file del foglio di stile nella
+# directory di output.
+# Nota: L'ordine dei file del foglio di stile aggiuntivi è importante (ad es.
+# l'ultimo foglio di stile nella lista sovrascrive l'impostazione dei precedenti
+# nella lista).
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_EXTRA_STYLESHEET =
+
+# Il tag LATEX_EXTRA_FILES può essere usato per specificare una o più immagini
+# extra o altri file sorgente che devono essere copiati nella directory di output
+# LATEX_OUTPUT. Nota che i file verranno copiati così come sono; non ci sono
+# comandi o marcatori disponibili.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_EXTRA_FILES      =
+
+# Se il tag PDF_HYPERLINKS è impostato a YES, il LaTeX che viene generato è
+# preparato per la conversione in PDF (usando ps2pdf o pdflatex). Il file PDF
+# conterrà collegamenti (proprio come l'output HTML) invece di riferimenti a
+# pagina. Questo rende l'output adatto alla navigazione online usando un
+# visualizzatore PDF.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+PDF_HYPERLINKS         = YES
+
+# Se il tag USE_PDFLATEX è impostato a YES, Doxygen userà il motore specificato
+# con LATEX_CMD_NAME per generare il file PDF direttamente dai file LaTeX. Imposta
+# questa opzione a YES, per ottenere una documentazione PDF di qualità superiore.
+#
+# Vedi anche la sezione LATEX_CMD_NAME per selezionare il motore.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+USE_PDFLATEX           = YES
+
+# Il tag LATEX_BATCHMODE segnala il comportamento di LaTeX in caso di errore.
+# Valori possibili sono: NO uguale a ERROR_STOP, YES uguale a BATCH, BATCH In
+# modalità batch nulla viene stampato sul terminale, gli errori vengono scorriti
+# come se si premesse <return> a ogni errore; file mancanti che TeX cerca di
+# inserire o richiede input da tastiera (\read su un flusso di input non aperto)
+# causano l'interruzione del lavoro, NON_STOP In modalità nonstop il messaggio di
+# diagnostica apparirà sul terminale, ma non c'è possibilità di interazione
+# dell'utente proprio come in modalità batch, SCROLL In modalità scroll, TeX si
+# fermerà solo per file mancanti da inserire o se è necessario input da tastiera
+# e ERROR_STOP In modalità errorstop, TeX si fermerà a ogni errore, chiedendo
+# l'intervento dell'utente.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_BATCHMODE        = NO
+
+# Se il tag LATEX_HIDE_INDICES è impostato a YES allora Doxygen non includerà i
+# capitoli dell'indice (come File Index, Compound Index, ecc.) nell'output.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_HIDE_INDICES     = NO
+
+# Il tag LATEX_BIB_STYLE può essere usato per specificare lo stile da usare per
+# la bibliografia, ad es. plainnat, o ieeetr. Vedi
+# https://en.wikipedia.org/wiki/BibTeX e \cite per maggiori informazioni.
+# Il valore predefinito è: plainnat.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_BIB_STYLE        = plainnat
+
+# Il tag LATEX_EMOJI_DIRECTORY viene usato per specificare il percorso (relativo
+# o assoluto) da cui verranno lette le immagini emoji. Se viene inserito un
+# percorso relativo, sarà relativo alla directory LATEX_OUTPUT. Se lasciato vuoto
+# verrà usata la directory LATEX_OUTPUT.
+# Questo tag richiede che il tag GENERATE_LATEX sia impostato a YES.
+
+LATEX_EMOJI_DIRECTORY  =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output RTF
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_RTF è impostato a YES, Doxygen genererà output RTF. L'output
+# RTF è ottimizzato per Word 97 e potrebbe non apparire troppo bello con altri
+# lettori/editor RTF.
+# Il valore predefinito è: NO.
+
+GENERATE_RTF           = NO
+
+# Il tag RTF_OUTPUT viene usato per specificare dove verranno messi i documenti
+# RTF. Se viene inserito un percorso relativo il valore di OUTPUT_DIRECTORY verrà
+# messo davanti ad esso.
+# La directory predefinita è: rtf.
+# Questo tag richiede che il tag GENERATE_RTF sia impostato a YES.
+
+RTF_OUTPUT             = rtf
+
+# Se il tag COMPACT_RTF è impostato a YES, Doxygen genera documenti RTF più
+# compatti. Questo può essere utile per piccoli progetti e può aiutare a
+# risparmiare qualche albero in generale.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_RTF sia impostato a YES.
+
+COMPACT_RTF            = NO
+
+# Se il tag RTF_HYPERLINKS è impostato a YES, l'RTF che viene generato conterrà
+# campi di collegamento ipertestuale. Il file RTF conterrà collegamenti (proprio
+# come l'output HTML) invece di riferimenti a pagina. Questo rende l'output adatto
+# alla navigazione online usando Word o qualche altro lettore compatibile con Word
+# che supporti quei campi.
+#
+# Nota: WordPad (write) e altri non supportano i collegamenti.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_RTF sia impostato a YES.
+
+RTF_HYPERLINKS         = NO
+
+# Carica le definizioni del foglio di stile dal file. La sintassi è simile al
+# file di configurazione di Doxygen, cioè una serie di assegnazioni. Devi fornire
+# solo le sostituzioni, le definizioni mancanti vengono impostate al loro valore
+# predefinito.
+#
+# Vedi anche la sezione "Doxygen usage" per informazioni su come generare il
+# foglio di stile predefinito che Doxygen usa normalmente.
+# Questo tag richiede che il tag GENERATE_RTF sia impostato a YES.
+
+RTF_STYLESHEET_FILE    =
+
+# Imposta variabili opzionali usate nella generazione di un documento RTF. La
+# sintassi è simile al file di configurazione di Doxygen. Un file di estensioni
+# modello può essere generato usando doxygen -e rtf extensionFile.
+# Questo tag richiede che il tag GENERATE_RTF sia impostato a YES.
+
+RTF_EXTENSIONS_FILE    =
+
+# Il tag RTF_EXTRA_FILES può essere usato per specificare una o più immagini extra
+# o altri file sorgente che devono essere copiati nella directory di output
+# RTF_OUTPUT. Nota che i file verranno copiati così come sono; non ci sono comandi
+# o marcatori disponibili.
+# Questo tag richiede che il tag GENERATE_RTF sia impostato a YES.
+
+RTF_EXTRA_FILES        =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output delle pagine man
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_MAN è impostato a YES, Doxygen genererà pagine man per classi
+# e file.
+# Il valore predefinito è: NO.
+
+GENERATE_MAN           = NO
+
+# Il tag MAN_OUTPUT viene usato per specificare dove verranno messe le pagine man.
+# Se viene inserito un percorso relativo il valore di OUTPUT_DIRECTORY verrà messo
+# davanti ad esso. Una directory man3 verrà creata all'interno della directory
+# specificata da MAN_OUTPUT.
+# La directory predefinita è: man.
+# Questo tag richiede che il tag GENERATE_MAN sia impostato a YES.
+
+MAN_OUTPUT             = man
+
+# Il tag MAN_EXTENSION determina l'estensione che viene aggiunta alle pagine man
+# generate. Nel caso in cui la sezione del manuale non inizi con un numero, il
+# numero 3 viene anteposto. Il punto (.) all'inizio del tag MAN_EXTENSION è
+# opzionale.
+# Il valore predefinito è: .3.
+# Questo tag richiede che il tag GENERATE_MAN sia impostato a YES.
+
+MAN_EXTENSION          = .3
+
+# Il tag MAN_SUBDIR determina il nome della directory creata all'interno di
+# MAN_OUTPUT in cui vengono posizionate le pagine man. Se predefinito a man
+# seguito da MAN_EXTENSION con il punto iniziale rimosso.
+# Questo tag richiede che il tag GENERATE_MAN sia impostato a YES.
+
+MAN_SUBDIR             =
+
+# Se il tag MAN_LINKS è impostato a YES e Doxygen genera output man, allora
+# genererà un ulteriore file man per ogni entità documentata nella/e pagina/e man
+# reale/i. Questi file aggiuntivi fanno solo riferimento alla pagina man reale, ma
+# senza di essi il comando man non sarebbe in grado di trovare la pagina
+# corretta.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_MAN sia impostato a YES.
+
+MAN_LINKS              = NO
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output XML
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_XML è impostato a YES, Doxygen genererà un file XML che
+# cattura la struttura del codice inclusa tutta la documentazione.
+# Il valore predefinito è: NO.
+
+GENERATE_XML           = NO
+
+# Il tag XML_OUTPUT viene usato per specificare dove verranno messe le pagine XML.
+# Se viene inserito un percorso relativo il valore di OUTPUT_DIRECTORY verrà messo
+# davanti ad esso.
+# La directory predefinita è: xml.
+# Questo tag richiede che il tag GENERATE_XML sia impostato a YES.
+
+XML_OUTPUT             = xml
+
+# Se il tag XML_PROGRAMLISTING è impostato a YES, Doxygen scaricherà gli elenchi
+# dei programmi (inclusi l'evidenziazione della sintassi e le informazioni di
+# riferimento incrociato) nell'output XML. Nota che abilitare questo aumenterà
+# significativamente la dimensione dell'output XML.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_XML sia impostato a YES.
+
+XML_PROGRAMLISTING     = YES
+
+# Se il tag XML_NS_MEMB_FILE_SCOPE è impostato a YES, Doxygen includerà anche i
+# membri del namespace nello scope del file, corrispondendo all'output HTML.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_XML sia impostato a YES.
+
+XML_NS_MEMB_FILE_SCOPE = NO
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output DOCBOOK
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_DOCBOOK è impostato a YES, Doxygen genererà file Docbook che
+# possono essere usati per generare PDF.
+# Il valore predefinito è: NO.
+
+GENERATE_DOCBOOK       = NO
+
+# Il tag DOCBOOK_OUTPUT viene usato per specificare dove verranno messe le pagine
+# Docbook. Se viene inserito un percorso relativo il valore di OUTPUT_DIRECTORY
+# verrà messo davanti ad esso.
+# La directory predefinita è: docbook.
+# Questo tag richiede che il tag GENERATE_DOCBOOK sia impostato a YES.
+
+DOCBOOK_OUTPUT         = docbook
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione per l'output AutoGen Definitions
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_AUTOGEN_DEF è impostato a YES, Doxygen genererà un file
+# AutoGen Definitions (vedi https://autogen.sourceforge.net/) che cattura la
+# struttura del codice inclusa tutta la documentazione. Nota che questa
+# funzionalità è ancora sperimentale e incompleta al momento.
+# Il valore predefinito è: NO.
+
+GENERATE_AUTOGEN_DEF   = NO
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output Sqlite3
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_SQLITE3 è impostato a YES Doxygen genererà un database
+# Sqlite3 con i simboli trovati da Doxygen memorizzati in tabelle.
+# Il valore predefinito è: NO.
+
+GENERATE_SQLITE3       = NO
+
+# Il tag SQLITE3_OUTPUT viene usato per specificare dove verrà messo il database
+# Sqlite3. Se viene inserito un percorso relativo il valore di OUTPUT_DIRECTORY
+# verrà messo davanti ad esso.
+# La directory predefinita è: sqlite3.
+# Questo tag richiede che il tag GENERATE_SQLITE3 sia impostato a YES.
+
+SQLITE3_OUTPUT         = sqlite3
+
+# Se il tag SQLITE3_RECREATE_DB è impostato a YES, il file di database
+# doxygen_sqlite3.db esistente verrà ricreato a ogni esecuzione di Doxygen. Se
+# impostato a NO, Doxygen avviserà se viene trovato un file di database esistente
+# e non lo modificherà.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_SQLITE3 sia impostato a YES.
+
+SQLITE3_RECREATE_DB    = YES
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative all'output del modulo Perl
+#---------------------------------------------------------------------------
+
+# Se il tag GENERATE_PERLMOD è impostato a YES, Doxygen genererà un file modulo
+# Perl che cattura la struttura del codice inclusa tutta la documentazione.
+#
+# Nota che questa funzionalità è ancora sperimentale e incompleta al momento.
+# Il valore predefinito è: NO.
+
+GENERATE_PERLMOD       = NO
+
+# Se il tag PERLMOD_LATEX è impostato a YES, Doxygen genererà le regole Makefile
+# necessarie, gli script Perl e il codice LaTeX per essere in grado di generare
+# output PDF e DVI dall'output del modulo Perl.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag GENERATE_PERLMOD sia impostato a YES.
+
+PERLMOD_LATEX          = NO
+
+# Se il tag PERLMOD_PRETTY è impostato a YES, l'output del modulo Perl sarà
+# formattato bene in modo che possa essere analizzato da un lettore umano. Questo
+# è utile se vuoi capire cosa sta succedendo. D'altra parte, se questo tag è
+# impostato a NO, la dimensione dell'output del modulo Perl sarà molto più piccola
+# e Perl lo analizzerà allo stesso modo.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag GENERATE_PERLMOD sia impostato a YES.
+
+PERLMOD_PRETTY         = YES
+
+# I nomi delle variabili make nel file doxyrules.make generato sono preceduti
+# dalla stringa contenuta in PERLMOD_MAKEVAR_PREFIX. Questo è utile in modo che
+# diversi file doxyrules.make inclusi dallo stesso Makefile non sovrascrivano le
+# variabili l'uno dell'altro.
+# Questo tag richiede che il tag GENERATE_PERLMOD sia impostato a YES.
+
+PERLMOD_MAKEVAR_PREFIX =
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative al preprocessore
+#---------------------------------------------------------------------------
+
+# Se il tag ENABLE_PREPROCESSING è impostato a YES, Doxygen valuterà tutte le
+# direttive del preprocessore C trovate nei sorgenti e nei file di inclusione.
+# Il valore predefinito è: YES.
+
+ENABLE_PREPROCESSING   = YES
+
+# Se il tag MACRO_EXPANSION è impostato a YES, Doxygen espanderà tutti i nomi di
+# macro nel codice sorgente. Se impostato a NO, verrà eseguita solo la
+# compilazione condizionale. L'espansione delle macro può essere fatta in modo
+# controllato impostando EXPAND_ONLY_PREDEF a YES.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag ENABLE_PREPROCESSING sia impostato a YES.
+
+MACRO_EXPANSION        = NO
+
+# Se i tag EXPAND_ONLY_PREDEF e MACRO_EXPANSION sono entrambi impostati a YES
+# allora l'espansione delle macro è limitata alle macro specificate con i tag
+# PREDEFINED e EXPAND_AS_DEFINED.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag ENABLE_PREPROCESSING sia impostato a YES.
+
+EXPAND_ONLY_PREDEF     = NO
+
+# Se il tag SEARCH_INCLUDES è impostato a YES, i file di inclusione in
+# INCLUDE_PATH verranno cercati se viene trovato un #include.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag ENABLE_PREPROCESSING sia impostato a YES.
+
+SEARCH_INCLUDES        = YES
+
+# Il tag INCLUDE_PATH può essere usato per specificare una o più directory che
+# contengono file di inclusione che non sono file di input ma dovrebbero essere
+# elaborati dal preprocessore. Nota che INCLUDE_PATH non è ricorsivo, quindi
+# l'impostazione di RECURSIVE non ha effetto qui.
+# Questo tag richiede che il tag SEARCH_INCLUDES sia impostato a YES.
+
+INCLUDE_PATH           =
+
+# Puoi usare il tag INCLUDE_FILE_PATTERNS per specificare uno o più modelli jolly
+# (come *.h e *.hpp) per filtrare i file di intestazione nelle directory. Se
+# lasciato vuoto, verranno usati i modelli specificati con FILE_PATTERNS.
+# Questo tag richiede che il tag ENABLE_PREPROCESSING sia impostato a YES.
+
+INCLUDE_FILE_PATTERNS  =
+
+# Il tag PREDEFINED può essere usato per specificare uno o più nomi di macro che
+# sono definiti prima che il preprocessore venga avviato (simile all'opzione -D di
+# ad es. gcc). L'argomento del tag è una lista di macro nella forma: nome o
+# nome=definizione (senza spazi). Se la definizione e il "=" sono omessi, si
+# assume "=1". Per impedire che una definizione di macro venga annullata tramite
+# #undef o espansa ricorsivamente usa l'operatore := invece dell'operatore =.
+# Questo tag richiede che il tag ENABLE_PREPROCESSING sia impostato a YES.
+
+PREDEFINED             =
+
+# Se i tag MACRO_EXPANSION e EXPAND_ONLY_PREDEF sono impostati a YES allora questo
+# tag può essere usato per specificare una lista di nomi di macro che dovrebbero
+# essere espanse. Verrà usata la definizione di macro trovata nei sorgenti. Usa il
+# tag PREDEFINED se vuoi usare una definizione di macro diversa che sovrascrive
+# la definizione trovata nel codice sorgente.
+# Questo tag richiede che il tag ENABLE_PREPROCESSING sia impostato a YES.
+
+EXPAND_AS_DEFINED      =
+
+# Se il tag SKIP_FUNCTION_MACROS è impostato a YES allora il preprocessore di
+# Doxygen rimuoverà tutti i riferimenti a macro simili a funzioni che sono da sole
+# su una riga, hanno un nome tutto in maiuscolo, e non terminano con un punto e
+# virgola. Tali macro di funzione sono tipicamente usate per codice boiler-plate, e
+# confonderebbero il parser se non rimosse.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag ENABLE_PREPROCESSING sia impostato a YES.
+
+SKIP_FUNCTION_MACROS   = YES
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative ai riferimenti esterni
+#---------------------------------------------------------------------------
+
+# Il tag TAGFILES può essere usato per specificare uno o più file tag. Per ogni
+# file tag dovrebbe essere aggiunta la posizione della documentazione esterna. Il
+# formato di un file tag senza questa posizione è il seguente:
+# TAGFILES = file1 file2 ...
+# Aggiungere la posizione per i file tag viene fatto come segue:
+# TAGFILES = file1=loc1 "file2 = loc2" ...
+# dove loc1 e loc2 possono essere percorsi relativi o assoluti o URL. Vedi la
+# sezione "Linking to external documentation" per maggiori informazioni sull'uso
+# dei file tag.
+# Nota: Ogni file tag deve avere un nome univoco (dove il nome NON include il
+# percorso). Se un file tag non si trova nella directory in cui viene eseguito
+# Doxygen, devi anche specificare il percorso del file tag qui.
+
+TAGFILES               =
+
+# Quando viene specificato un nome di file dopo GENERATE_TAGFILE, Doxygen creerà
+# un file tag che è basato sui file di input che legge. Vedi la sezione "Linking
+# to external documentation" per maggiori informazioni sull'uso dei file tag.
+
+GENERATE_TAGFILE       =
+
+# Se il tag ALLEXTERNALS è impostato a YES, tutte le classi e i namespace esterni
+# verranno elencati nell'indice delle classi e dei namespace. Se impostato a NO,
+# verranno elencate solo le classi esterne ereditate.
+# Il valore predefinito è: NO.
+
+ALLEXTERNALS           = NO
+
+# Se il tag EXTERNAL_GROUPS è impostato a YES, tutti i gruppi esterni verranno
+# elencati nell'indice degli argomenti. Se impostato a NO, verranno elencati solo
+# i gruppi del progetto corrente.
+# Il valore predefinito è: YES.
+
+EXTERNAL_GROUPS        = YES
+
+# Se il tag EXTERNAL_PAGES è impostato a YES, tutte le pagine esterne verranno
+# elencate nell'indice delle pagine correlate. Se impostato a NO, verranno
+# elencate solo le pagine del progetto corrente.
+# Il valore predefinito è: YES.
+
+EXTERNAL_PAGES         = YES
+
+#---------------------------------------------------------------------------
+# Opzioni di configurazione relative agli strumenti di generazione di diagrammi
+#---------------------------------------------------------------------------
+
+# Se impostato a YES i grafici di ereditarietà e collaborazione nasconderanno le
+# relazioni di ereditarietà e utilizzo se il target non è documentato o non è una
+# classe.
+# Il valore predefinito è: YES.
+
+HIDE_UNDOC_RELATIONS   = YES
+
+# Se imposti il tag HAVE_DOT a YES allora Doxygen assumerà che lo strumento dot
+# sia disponibile dal percorso. Questo strumento fa parte di Graphviz (vedi:
+# https://www.graphviz.org/), un toolkit di visualizzazione di grafici di AT&T e
+# Lucent Bell Labs. Le altre opzioni in questa sezione non hanno effetto se questa
+# opzione è impostata a NO
+# Il valore predefinito è: NO.
+
+HAVE_DOT               = NO
+
+# Il tag DOT_NUM_THREADS specifica il numero di invocazioni di dot che Doxygen può
+# eseguire in parallelo. Quando impostato a 0 Doxygen baserà questo sul numero di
+# processori disponibili nel sistema. Puoi impostarlo esplicitamente a un valore
+# maggiore di 0 per avere controllo sull'equilibrio tra carico della CPU e
+# velocità di elaborazione.
+# Valore minimo: 0, valore massimo: 512, valore predefinito: 0.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_NUM_THREADS        = 0
+
+# Il tag DOT_BATCH_SIZE specifica il numero di grafici dot che Doxygen può
+# compilare in una singola invocazione di dot. Quando impostato a 1 Doxygen
+# invocherà dot per ogni grafico separatamente, il che può causare un significativo
+# sovraccarico di creazione di processi specialmente su sistemi con molti core
+# della CPU. Insieme a DOT_NUM_THREADS questa impostazione può essere usata per
+# ottimizzare la velocità di elaborazione di dot per un particolare sistema.
+# Doxygen cercherà di dare a ogni thread un batch di lavoro bilanciato. Se il
+# numero totale di grafici da elaborare supera DOT_NUM_THREADS * DOT_BATCH_SIZE
+# allora verranno creati batch aggiuntivi per dot da elaborare.
+# Valore minimo: 1, valore massimo: 1000, valore predefinito: 50.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_BATCH_SIZE         = 50
+
+# DOT_COMMON_ATTR sono attributi comuni per nodi, archi ed etichette dei
+# sottografici. Quando vuoi un font dall'aspetto diverso nei file dot che Doxygen
+# genera puoi specificare gli attributi fontname, fontcolor e fontsize. Per i
+# dettagli vedi <a href=https://graphviz.org/doc/info/attrs.html>Node, Edge and
+# Graph Attributes specification</a> Devi assicurarti che dot sia in grado di
+# trovare il font, il che può essere fatto mettendolo in una posizione standard o
+# impostando la variabile d'ambiente DOTFONTPATH o impostando DOT_FONTPATH alla
+# directory contenente il font. La dimensione del font predefinita di graphviz è
+# 14.
+# Il valore predefinito è: fontname=Helvetica,fontsize=10.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_COMMON_ATTR        = "fontname=Helvetica,fontsize=10"
+
+# DOT_EDGE_ATTR viene concatenato con DOT_COMMON_ATTR. Per uno stile elegante puoi
+# aggiungere 'arrowhead=open, arrowtail=open, arrowsize=0.5'. <a
+# href=https://graphviz.org/doc/info/arrows.html>Documentazione completa sulle
+# forme delle frecce.</a>
+# Il valore predefinito è: labelfontname=Helvetica,labelfontsize=10.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_EDGE_ATTR          = "labelfontname=Helvetica,labelfontsize=10"
+
+# DOT_NODE_ATTR viene concatenato con DOT_COMMON_ATTR. Per una vista senza riquadri
+# attorno ai nodi imposta 'shape=plain' o 'shape=plaintext' <a
+# href=https://www.graphviz.org/doc/info/shapes.html>Specifica delle forme</a>
+# Il valore predefinito è: shape=box,height=0.2,width=0.4.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_NODE_ATTR          = "shape=box,height=0.2,width=0.4"
+
+# Puoi impostare il percorso dove dot può trovare il font specificato con fontname
+# in DOT_COMMON_ATTR e altri attributi dot.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_FONTPATH           =
+
+# Se il tag CLASS_GRAPH è impostato a YES o GRAPH o BUILTIN allora Doxygen
+# genererà un grafico per ogni classe documentata che mostra le relazioni di
+# ereditarietà dirette e indirette. Nel caso in cui il tag CLASS_GRAPH sia
+# impostato a YES o GRAPH e HAVE_DOT sia abilitato, allora dot verrà usato per
+# disegnare il grafico. Nel caso in cui il tag CLASS_GRAPH sia impostato a YES e
+# HAVE_DOT sia disabilitato o se il tag CLASS_GRAPH è impostato a BUILTIN, allora
+# verrà usato il generatore integrato. Se il tag CLASS_GRAPH è impostato a TEXT le
+# relazioni di ereditarietà dirette e indirette verranno mostrate come testi /
+# collegamenti. Abilitare esplicitamente un grafico di ereditarietà o scegliere
+# una rappresentazione diversa per un grafico di ereditarietà di una classe
+# specifica, può essere fatto tramite il comando \inheritancegraph. Disabilitare
+# un grafico di ereditarietà può essere fatto tramite il comando
+# \hideinheritancegraph.
+# Valori possibili sono: NO, YES, TEXT, GRAPH e BUILTIN.
+# Il valore predefinito è: YES.
+
+CLASS_GRAPH            = YES
+
+# Se il tag COLLABORATION_GRAPH è impostato a YES allora Doxygen genererà un
+# grafico per ogni classe documentata che mostra le dipendenze di implementazione
+# dirette e indirette (ereditarietà, contenimento, e variabili di riferimento di
+# classe) della classe con altre classi documentate. Abilitare esplicitamente un
+# grafico di collaborazione, quando COLLABORATION_GRAPH è impostato a NO, può
+# essere fatto tramite il comando \collaborationgraph. Disabilitare un grafico di
+# collaborazione può essere fatto tramite il comando \hidecollaborationgraph.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+COLLABORATION_GRAPH    = YES
+
+# Se il tag GROUP_GRAPHS è impostato a YES allora Doxygen genererà un grafico per
+# i gruppi, che mostra le dipendenze dirette dei gruppi. Abilitare esplicitamente
+# un grafico di dipendenza dei gruppi, quando GROUP_GRAPHS è impostato a NO, può
+# essere fatto tramite il comando \groupgraph. Disabilitare un grafico di
+# directory può essere fatto tramite il comando \hidegroupgraph. Vedi anche il
+# capitolo Grouping nel manuale.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+GROUP_GRAPHS           = YES
+
+# Se il tag UML_LOOK è impostato a YES, Doxygen genererà diagrammi di ereditarietà
+# e collaborazione in uno stile simile al Unified Modeling Language dell'OMG.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+UML_LOOK               = NO
+
+# Se il tag UML_LOOK è abilitato, i campi e i metodi vengono mostrati all'interno
+# del nodo della classe. Se ci sono molti campi o metodi e molti nodi il grafico
+# può diventare troppo grande per essere utile. La soglia UML_LIMIT_NUM_FIELDS
+# limita il numero di elementi per ogni tipo per rendere la dimensione più
+# gestibile. Imposta questo a 0 per nessun limite. Nota che la soglia può essere
+# superata del 50% prima che il limite venga applicato. Quindi quando imposti la
+# soglia a 10, fino a 15 campi possono apparire, ma se il numero supera 15, la
+# quantità totale di campi mostrati è limitata a 10.
+# Valore minimo: 0, valore massimo: 100, valore predefinito: 10.
+# Questo tag richiede che il tag UML_LOOK sia impostato a YES.
+
+UML_LIMIT_NUM_FIELDS   = 10
+
+# Se il tag UML_LOOK è abilitato, le etichette dei campi vengono mostrate lungo il
+# bordo tra due nodi di classe. Se ci sono molti campi e molti nodi il grafico può
+# diventare troppo disordinato. La soglia UML_MAX_EDGE_LABELS limita il numero di
+# elementi per rendere la dimensione più gestibile. Imposta questo a 0 per nessun
+# limite.
+# Valore minimo: 0, valore massimo: 100, valore predefinito: 10.
+# Questo tag richiede che il tag UML_LOOK sia impostato a YES.
+
+UML_MAX_EDGE_LABELS    = 10
+
+# Se il tag DOT_UML_DETAILS è impostato a NO, Doxygen mostrerà attributi e metodi
+# senza tipi e argomenti nei grafici UML. Se il tag DOT_UML_DETAILS è impostato a
+# YES, Doxygen aggiungerà tipo e argomenti per attributi e metodi nei grafici UML.
+# Se il tag DOT_UML_DETAILS è impostato a NONE, Doxygen non genererà campi con
+# informazioni sui membri della classe nei grafici UML. I diagrammi delle classi
+# appariranno simili ai diagrammi delle classi predefiniti ma usando la notazione
+# UML per le relazioni.
+# Valori possibili sono: NO, YES e NONE.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag UML_LOOK sia impostato a YES.
+
+DOT_UML_DETAILS        = NO
+
+# Il tag DOT_WRAP_THRESHOLD può essere usato per impostare il numero massimo di
+# caratteri da visualizzare su una singola riga. Se la lunghezza effettiva della
+# riga supera significativamente questa soglia verrà spezzata su più righe. Alcune
+# euristiche vengono applicate per evitare interruzioni di riga brutte.
+# Valore minimo: 0, valore massimo: 1000, valore predefinito: 17.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_WRAP_THRESHOLD     = 17
+
+# Se il tag TEMPLATE_RELATIONS è impostato a YES allora i grafici di ereditarietà
+# e collaborazione mostreranno le relazioni tra template e le loro istanze.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+TEMPLATE_RELATIONS     = NO
+
+# Se i tag INCLUDE_GRAPH, ENABLE_PREPROCESSING e SEARCH_INCLUDES sono impostati a
+# YES allora Doxygen genererà un grafico per ogni file documentato che mostra le
+# dipendenze di inclusione dirette e indirette del file con altri file
+# documentati. Abilitare esplicitamente un grafico di inclusione, quando
+# INCLUDE_GRAPH è impostato a NO, può essere fatto tramite il comando
+# \includegraph. Disabilitare un grafico di inclusione può essere fatto tramite il
+# comando \hideincludegraph.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+INCLUDE_GRAPH          = YES
+
+# Se i tag INCLUDED_BY_GRAPH, ENABLE_PREPROCESSING e SEARCH_INCLUDES sono
+# impostati a YES allora Doxygen genererà un grafico per ogni file documentato che
+# mostra le dipendenze di inclusione dirette e indirette del file con altri file
+# documentati. Abilitare esplicitamente un grafico incluso da, quando
+# INCLUDED_BY_GRAPH è impostato a NO, può essere fatto tramite il comando
+# \includedbygraph. Disabilitare un grafico incluso da può essere fatto tramite il
+# comando \hideincludedbygraph.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+INCLUDED_BY_GRAPH      = YES
+
+# Se il tag CALL_GRAPH è impostato a YES allora Doxygen genererà un grafico di
+# dipendenza delle chiamate per ogni funzione globale o metodo di classe.
+#
+# Nota che abilitare questa opzione aumenterà significativamente il tempo di
+# un'esecuzione. Quindi nella maggior parte dei casi sarà meglio abilitare i
+# grafici delle chiamate solo per funzioni selezionate usando il comando
+# \callgraph. Disabilitare un grafico delle chiamate può essere fatto tramite il
+# comando \hidecallgraph.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+CALL_GRAPH             = NO
+
+# Se il tag CALLER_GRAPH è impostato a YES allora Doxygen genererà un grafico di
+# dipendenza dei chiamanti per ogni funzione globale o metodo di classe.
+#
+# Nota che abilitare questa opzione aumenterà significativamente il tempo di
+# un'esecuzione. Quindi nella maggior parte dei casi sarà meglio abilitare i
+# grafici dei chiamanti solo per funzioni selezionate usando il comando
+# \callergraph. Disabilitare un grafico dei chiamanti può essere fatto tramite il
+# comando \hidecallergraph.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+CALLER_GRAPH           = NO
+
+# Se il tag GRAPHICAL_HIERARCHY è impostato a YES allora Doxygen userà una
+# gerarchia grafica di tutte le classi invece che testuale.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+GRAPHICAL_HIERARCHY    = YES
+
+# Se il tag DIRECTORY_GRAPH è impostato a YES allora Doxygen mostrerà le
+# dipendenze che una directory ha su altre directory in modo grafico. Le relazioni
+# di dipendenza sono determinate dalle relazioni #include tra i file nelle
+# directory. Abilitare esplicitamente un grafico di directory, quando
+# DIRECTORY_GRAPH è impostato a NO, può essere fatto tramite il comando
+# \directorygraph. Disabilitare un grafico di directory può essere fatto tramite il
+# comando \hidedirectorygraph.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DIRECTORY_GRAPH        = YES
+
+# Il tag DIR_GRAPH_MAX_DEPTH può essere usato per limitare il numero massimo di
+# livelli di directory figlie generate nei grafici di dipendenza delle directory
+# da dot.
+# Valore minimo: 1, valore massimo: 25, valore predefinito: 1.
+# Questo tag richiede che il tag DIRECTORY_GRAPH sia impostato a YES.
+
+DIR_GRAPH_MAX_DEPTH    = 1
+
+# Il tag DOT_IMAGE_FORMAT può essere usato per impostare il formato immagine delle
+# immagini generate da dot. Per una spiegazione dei formati immagine vedi la
+# sezione formati di output nella documentazione dello strumento dot (Graphviz
+# (vedi: https://www.graphviz.org/)).
+#
+# Nota che i formati svg:cairo e svg:cairo:cairo non possono essere usati in
+# combinazione con INTERACTIVE_SVG (il tag INTERACTIVE_SVG verrà impostato a NO).
+# Valori possibili sono: png, jpg, gif, svg, png:gd, png:gd:gd, png:cairo,
+# png:cairo:gd, png:cairo:cairo, png:cairo:gdiplus, png:gdiplus,
+# png:gdiplus:gdiplus, svg:cairo, svg:cairo:cairo, svg:svg, svg:svg:core,
+# gif:cairo, gif:cairo:gd, gif:cairo:gdiplus, gif:gdiplus, gif:gdiplus:gdiplus,
+# gif:gd, gif:gd:gd, jpg:cairo, jpg:cairo:gd, jpg:cairo:gdiplus, jpg:gd,
+# jpg:gd:gd, jpg:gdiplus e jpg:gdiplus:gdiplus.
+# Il valore predefinito è: png.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_IMAGE_FORMAT       = png
+
+# Se DOT_IMAGE_FORMAT è impostato a svg o svg:svg o svg:svg:core, allora questa
+# opzione può essere impostata a YES per abilitare la generazione di immagini SVG
+# interattive che permettono zoom e panoramica.
+#
+# Nota che questo richiede un browser moderno diverso da Internet Explorer.
+# Testati e funzionanti sono Firefox, Chrome, Safari e Opera.
+#
+# Nota Questa opzione verrà automaticamente disabilitata quando DOT_IMAGE_FORMAT è
+# impostato a svg:cairo o svg:cairo:cairo.
+# Il valore predefinito è: NO.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+INTERACTIVE_SVG        = NO
+
+# Il tag DOT_PATH può essere usato per specificare il percorso dove può essere
+# trovato lo strumento dot. Se lasciato vuoto, si assume che lo strumento dot
+# possa essere trovato nel percorso.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_PATH               =
+
+# Il tag DOTFILE_DIRS può essere usato per specificare una o più directory che
+# contengono file dot che sono inclusi nella documentazione (vedi il comando
+# \dotfile).
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOTFILE_DIRS           =
+
+# Puoi includere diagrammi fatti con dia nella documentazione Doxygen. Doxygen
+# eseguirà allora dia per produrre il diagramma e inserirlo nella documentazione.
+# Il tag DIA_PATH ti permette di specificare la directory dove risiede il binario
+# dia. Se lasciato vuoto si assume che dia possa essere trovato nel percorso di
+# ricerca predefinito.
+
+DIA_PATH               =
+
+# Il tag DIAFILE_DIRS può essere usato per specificare una o più directory che
+# contengono file dia che sono inclusi nella documentazione (vedi il comando
+# \diafile).
+
+DIAFILE_DIRS           =
+
+# Quando si usa PlantUML, il tag PLANTUML_JAR_PATH dovrebbe essere usato per
+# specificare il percorso dove java può trovare il file plantuml.jar o il nome del
+# file jar da usare. Se lasciato vuoto, si assume che PlantUML non sia usato o
+# chiamato durante una fase di pre-elaborazione. Doxygen genererà un avviso quando
+# incontra un comando \startuml in questo caso e non genererà output per il
+# diagramma.
+
+PLANTUML_JAR_PATH      =
+
+# Quando si usa PlantUML, il tag PLANTUML_CFG_FILE può essere usato per
+# specificare un file di configurazione per PlantUML.
+
+PLANTUML_CFG_FILE      =
+
+# Quando si usa PlantUML, i percorsi specificati vengono cercati per i file
+# specificati dall'istruzione !include in un blocco PlantUML.
+
+PLANTUML_INCLUDE_PATH  =
+
+# Il tag PLANTUMLFILE_DIRS può essere usato per specificare una o più directory
+# che contengono file PlantUml che sono inclusi nella documentazione (vedi il
+# comando \plantumlfile).
+
+PLANTUMLFILE_DIRS      =
+
+# Quando si usano diagrammi Mermaid con il rendering CLI, il tag MERMAID_PATH
+# dovrebbe essere usato per specificare la directory dove può essere trovato
+# l'eseguibile mmdc (Mermaid CLI). Se lasciato vuoto, il rendering basato su CLI è
+# disabilitato. Per l'output HTML, il rendering lato client tramite JavaScript
+# viene usato per impostazione predefinita e non richiede mmdc. Per l'output
+# LaTeX/PDF, mmdc è richiesto per pre-generare le immagini. Doxygen genererà un
+# avviso quando il rendering CLI è necessario ma mmdc non è disponibile.
+
+MERMAID_PATH           =
+
+# Quando si usano diagrammi Mermaid, il tag MERMAID_CONFIG_FILE può essere usato
+# per specificare un file di configurazione JSON per lo strumento Mermaid CLI
+# (mmdc). Questo file può contenere impostazioni del tema e altre opzioni di
+# configurazione di Mermaid.
+
+MERMAID_CONFIG_FILE    =
+
+# Il tag MERMAID_RENDER_MODE seleziona come vengono renderizzati i diagrammi
+# Mermaid. Valori possibili sono: AUTO (usa il rendering lato client per HTML e
+# mmdc per LaTeX/PDF e altri formati. Se MERMAID_PATH non è impostato, i diagrammi
+# non HTML produrranno un avviso), CLI (usa lo strumento mmdc per pre-generare le
+# immagini (richiede Node.js e mermaid-js/mermaid-cli). Funziona per tutti i
+# formati di output) e CLIENT_SIDE (incorpora mermaid.js nell'output HTML per il
+# rendering lato client. Non richiede mmdc ma funziona solo per l'output HTML).
+# Il valore predefinito è: AUTO.
+
+MERMAID_RENDER_MODE    = AUTO
+
+# Il tag MERMAID_JS_URL specifica l'URL da cui caricare mermaid.js quando si usa
+# il rendering lato client (MERMAID_RENDER_MODE è CLIENT_SIDE o AUTO). Il valore
+# predefinito punta all'ultima release di Mermaid v11 sul CDN jsDelivr.
+#
+# L'URL CDN predefinito richiede accesso a Internet quando si visualizza la
+# documentazione generata. Per l'uso offline, scarica mermaid.esm.min.mjs e imposta
+# questo a un percorso relativo, o usa MERMAID_RENDER_MODE=CLI per pre-generare le
+# immagini invece. Esempi:
+# - Ultima v11 (predefinito):
+# https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs
+# - Versione fissata:
+# https://cdn.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.esm.min.mjs
+# - Copia locale: ./mermaid.esm.min.mjs (l'utente deve posizionare il file nella
+# directory di output HTML)
+# Il valore predefinito è:
+# https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs.
+
+MERMAID_JS_URL         = https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs
+
+# Il tag MERMAIDFILE_DIRS può essere usato per specificare una o più directory che
+# contengono file Mermaid che sono inclusi nella documentazione (vedi il comando
+# \mermaidfile).
+
+MERMAIDFILE_DIRS       =
+
+# Il tag DOT_GRAPH_MAX_NODES può essere usato per impostare il numero massimo di
+# nodi che verranno mostrati nel grafico. Se il numero di nodi in un grafico
+# diventa più grande di questo valore, Doxygen troncherà il grafico, che viene
+# visualizzato rappresentando un nodo come un riquadro rosso. Nota che se il
+# numero di figli diretti del nodo radice in un grafico è già più grande di
+# DOT_GRAPH_MAX_NODES allora il grafico non verrà mostrato affatto. Nota anche che
+# la dimensione di un grafico può essere ulteriormente limitata da
+# MAX_DOT_GRAPH_DEPTH.
+# Valore minimo: 0, valore massimo: 10000, valore predefinito: 50.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+DOT_GRAPH_MAX_NODES    = 50
+
+# Il tag MAX_DOT_GRAPH_DEPTH può essere usato per impostare la profondità massima
+# dei grafici generati da dot. Un valore di profondità di 3 significa che verranno
+# mostrati solo i nodi raggiungibili dalla radice seguendo un percorso attraverso
+# al massimo 3 archi. I nodi che si trovano più lontani dal nodo radice verranno
+# omessi. Nota che impostare questa opzione a 1 o 2 può ridurre notevolmente il
+# tempo di calcolo necessario per grandi basi di codice. Nota anche che la
+# dimensione di un grafico può essere ulteriormente limitata da DOT_GRAPH_MAX_NODES.
+# Usare una profondità di 0 significa nessuna restrizione di profondità.
+# Valore minimo: 0, valore massimo: 1000, valore predefinito: 0.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+MAX_DOT_GRAPH_DEPTH    = 0
+
+# Se il tag GENERATE_LEGEND è impostato a YES Doxygen genererà una pagina di
+# legenda che spiega il significato dei vari riquadri e frecce nei grafici
+# generati da dot.
+# Nota: Questo tag richiede che UML_LOOK non sia impostato, cioè che venga usata
+# la rappresentazione grafica interna di Doxygen per i diagrammi di ereditarietà e
+# collaborazione.
+# Il valore predefinito è: YES.
+# Questo tag richiede che il tag HAVE_DOT sia impostato a YES.
+
+GENERATE_LEGEND        = YES
+
+# Se il tag DOT_CLEANUP è impostato a YES, Doxygen rimuoverà i file intermedi che
+# vengono usati per generare i vari grafici.
+#
+# Nota: Questa impostazione non è usata solo per i file dot ma anche per i file
+# temporanei msc.
+# Il valore predefinito è: YES.
+
+DOT_CLEANUP            = YES
+
+# Puoi definire diagrammi di sequenza dei messaggi all'interno dei commenti Doxygen
+# usando il comando \msc. Se il tag MSCGEN_TOOL è lasciato vuoto (il valore
+# predefinito), allora Doxygen userà una versione integrata dello strumento mscgen
+# per produrre i grafici. In alternativa, il tag MSCGEN_TOOL può anche
+# specificare il nome di uno strumento esterno. Ad esempio, specificando prog come
+# valore, Doxygen chiamerà lo strumento come prog -T <outfile_format> -o
+# <outputfile> <inputfile>. Lo strumento esterno dovrebbe supportare i formati di
+# file di output "png", "eps", "svg" e "ismap".
+
+MSCGEN_TOOL            =
+
+# Il tag MSCFILE_DIRS può essere usato per specificare una o più directory che
+# contengono file msc che sono inclusi nella documentazione (vedi il comando
+# \mscfile).
+
+MSCFILE_DIRS           =
